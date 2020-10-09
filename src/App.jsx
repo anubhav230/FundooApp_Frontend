@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
-import SignIn from './Components/Login'
+// import SignIn from './Components/Login'
+import LoginInput from './Components/Login'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <p>
-            <SignIn/>
+            <LoginInput/>
         </p>
       </header>
     </div>
