@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -9,6 +9,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Logo from '../../src/image/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
+import {Formik} from "formik";
+import * as Yup from "yup";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -24,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "1rem",
         display: 'block',
     },
-    layout:{
+    layout: {
         width: 'auto',
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
@@ -39,70 +41,87 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-    }, 
+    },
 
 }));
 
+const validation = Yup.object().shape({
+
+    email: Yup.string().email().required("Email required!"),
+    password: Yup.string()
+        .min(4, "Must have minimum Charachters")
+        .required("Required !").matches(/(?=.*[0-9])/, "Password must contain a number."),
+});
+
+
+
 export default function SignIn() {
+
+    const [open, setOpen] = React.useState(false);
+    const [user, setUser] = useState({email : "",password : "" });
+
+
     const classes = useStyles();
     return (
+        <Formik initialValues={{email:"", password:""}} validationSchema={validation}>
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <main className={classes.layout}>
-            <Paper className={classes.paper}>
-                <div className={classes.paper}> 
-                    <img src={Logo} />
-                    <Typography component="h1" variant="h5">
-                        Sign in
+                <Paper className={classes.paper}>
+                    <div className={classes.paper}>
+                        <img src={Logo} />
+                        <Typography component="h1" variant="h5">
+                            Sign in
                     </Typography>
-                    <form className={classes.form} noValidate>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
-                            Sign In
+                        <form className={classes.form} noValidate>
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                name="email"
+                                autoComplete="email"
+                                autoFocus
+                            />
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                            />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                            >
+                                Sign In
                         </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
+                            <Grid container>
+                                <Grid item xs>
+                                    <Link href="#" variant="body2">
+                                        Forgot password?
                         </Link>
+                                </Grid>
+                                <Grid item>
+                                    <Link href="#" variant="body2">
+                                        {"Don't have an account? Sign Up"}
+                                    </Link>
+                                </Grid>
                             </Grid>
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
-                        </Grid>
-                    </form>
-                </div>
+                        </form>
+                    </div>
                 </Paper>
             </main>
         </Container>
+        </Formik>
     );
 }
