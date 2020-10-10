@@ -8,15 +8,10 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Logo from '../../src/image/fundoologo.jpg';
-
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
+
     form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(1),
@@ -27,8 +22,24 @@ const useStyles = makeStyles((theme) => ({
     span: {
         color: "red",
         fontSize: "1rem",
-        display: 'block'
+        display: 'block',
     },
+    layout:{
+        width: 'auto',
+        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(2),
+
+    },
+    paper: {
+        marginTop: theme.spacing(8),
+        marginBottom: theme.spacing(3),
+        padding: theme.spacing(1),
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    }, 
 
 }));
 
@@ -38,7 +49,8 @@ export default function SignIn() {
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <main className={classes.layout}>
-                <div className={classes.paper}>
+            <Paper className={classes.paper}>
+                <div className={classes.paper}> 
                     <img src={Logo} />
                     <Typography component="h1" variant="h5">
                         Sign in
@@ -89,8 +101,8 @@ export default function SignIn() {
                         </Grid>
                     </form>
                 </div>
+                </Paper>
             </main>
-
         </Container>
     );
 }

@@ -1,18 +1,17 @@
 import React from 'react';
 import './App.css';
-// import SignIn from './Components/Login'
-import LoginInput from './Components/Login'
+import {Route, Switch } from 'react-router-dom'
+import LoginIn from './components/Login'
+import Error from './components/Error'
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-            <LoginInput/>
-        </p>
-      </header>
-    </div>
-  );
+    return (
+        <Switch>
+            <Route exact path="/" component={LoginIn}/>
+            <Route component={Error}/>
+        </Switch>
+    );
 }
 
 export default App;
