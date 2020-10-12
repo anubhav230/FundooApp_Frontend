@@ -73,8 +73,8 @@ export default function SignUp() {
     };
 
     const handleChangePassword = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-      };
+        setValues({...values, [prop]: event.target.value});
+    };
 
     return (
 
