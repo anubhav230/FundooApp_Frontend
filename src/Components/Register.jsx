@@ -11,6 +11,11 @@ import Logo from '../../src/image/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
 import {Formik} from "formik";
 import * as Yup from "yup";
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faEye } from '@fortawesome/free-solid-svg-icons'
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +59,25 @@ const validationSchema = Yup.object().shape({
 export default function SignUp() {
     const classes = useStyles();
 
+    const [values, setValues] = React.useState({
+        password: '',
+        showPassword: false,
+    })
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+    const handleClickShowPassword = () => {
+        setValues({...values, showPassword: !values.showPassword});
+    };
+
+    const handleChangePassword = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+      };
+
     return (
+
         <Formik initialValues={{firstName: "", lastName: "", email: "", password: ""}}
             validationSchema={validationSchema}
         >
@@ -121,6 +144,7 @@ export default function SignUp() {
                                             onBlur={handleBlur}
                                             className={errors.email && touched.email && "error"}
                                         />
+
                                         {errors.email && touched.email && (
                                             <div className="input-feedback">{errors.email}</div>
                                         )}
@@ -138,7 +162,20 @@ export default function SignUp() {
                                             value={values.password}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
+                                            onFocus={handleChangePassword}
                                             className={errors.password && touched.password && "error"}
+                                            InputProps={{
+                                                endAdornment: (
+                                                    <IconButton
+                                                        size="small"
+                                                        aria-label="toggle password visibility"
+                                                        onClick={handleClickShowPassword}
+                                                        onMouseDown={handleMouseDownPassword}
+                                                        edge="end">
+                                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                                    </IconButton>
+                                                ),
+                                            }}
                                         />
                                         {errors.password && touched.password && (
                                             <div className="input-feedback">{errors.password}</div>
