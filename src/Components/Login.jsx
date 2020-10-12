@@ -33,11 +33,10 @@ const useStyles = makeStyles((theme) => ({
 
     },
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(6),
         marginBottom: theme.spacing(3),
-        padding: theme.spacing(1),
-        paddingLeft: theme.spacing(2),
-        paddingRight: theme.spacing(2),
+        paddingLeft: theme.spacing(1.5),
+        paddingRight: theme.spacing(1.5),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -49,12 +48,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 const validationSchema = Yup.object().shape({
-
     email: Yup.string().email().required("Email required!"),
     password: Yup.string()
-        .min(4, "Must have minimum Charachters")
+        .min(4, "Must have minimum 4 Charachters")
         .required("Password required!").matches(/(?=.*[0-9])/, "Password must contain a number."),
-
 });
 
 export default function SignIn() {
@@ -127,7 +124,7 @@ export default function SignIn() {
                                     </Link>
                                         </Grid>
                                         <Grid item>
-                                            <Link href="#" variant="body2">
+                                            <Link href="http://localhost:3000/register" variant="body2">
                                                 {"Don't have an account? Sign Up"}
                                             </Link>
                                         </Grid>
@@ -137,8 +134,6 @@ export default function SignIn() {
                         </Paper>
                     </main>
                 </Container>
-
-            // }}
                 )}
         </Formik>
     )
