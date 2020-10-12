@@ -42,9 +42,9 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema = Yup.object().shape({
     firstName: Yup.string().min(4, 'Must cuntain 4 Characters!').required("firstName required!")
-    .matches(/^[A-Za-z]+$/, "Only Alphabets allowed"),
+        .matches(/^[A-Za-z]+$/, "Only Alphabets allowed"),
     lastName: Yup.string().min(4, 'Must cuntain 3 Characters!').required("lastName required!")
-    .matches(/^[A-Za-z]+$/, "Only Alphabets allowed"),
+        .matches(/^[A-Za-z]+$/, "Only Alphabets allowed"),
     email: Yup.string().email().required("Email required!"),
     password: Yup.string()
         .min(4, "Must have minimum 4 Charachters")
@@ -55,95 +55,117 @@ export default function SignUp() {
     const classes = useStyles();
 
     return (
-        <Formik initialValues={{ firstName: "", lastName: "", email: "", password: "" }}
-        validationSchema={validationSchema}
+        <Formik initialValues={{firstName: "", lastName: "", email: "", password: ""}}
+            validationSchema={validationSchema}
         >
-            {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
+            {({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
                 <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Grid item xs={false} sm={4} md={7} className={classes.image} />
-                <Paper className={classes.paper}>
-                    <div className={classes.paper}>
-                        <img src={Logo} />
-                        <Typography component="h1" variant="h5">
-                            Create your Fundoo Account
-                    </Typography>
-                        <form className={classes.form} noValidate>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        autoComplete="fname"
-                                        name="firstName"
-                                        variant="outlined"
-                                        required
-                                        fullWidth
-                                        id="firstName"
-                                        label="First Name"
-                                        autoFocus
-                                        value={values.firstName}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={errors.firstName && touched.firstName && "error"}
-                                    />
-                                    {errors.firstName && touched.firstName && (
-                                        <div className="input-feedback">{errors.firstName}</div>
-                                    )}
+                    <CssBaseline />
+                    <Grid item xs={false} sm={4} md={7} className={classes.image} />
+                    <Paper className={classes.paper}>
+                        <div className={classes.paper}>
+                            <img src={Logo} />
+                            <Typography component="h1" variant="h5">
+                                Create your Fundoo Account
+                            </Typography>
+                            <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            autoComplete="fname"
+                                            name="firstName"
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            id="firstName"
+                                            label="First Name"
+                                            autoFocus
+                                            value={values.firstName}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={errors.firstName && touched.firstName && "error"}
+                                        />
+                                        {errors.firstName && touched.firstName && (
+                                            <div className="input-feedback">{errors.firstName}</div>
+                                        )}
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            id="lastName"
+                                            label="Last Name"
+                                            name="lastName"
+                                            autoComplete="lname"
+                                            value={values.lastName}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={errors.lastName && touched.lastName && "error"}
+                                        />
+                                        {errors.lastName && touched.lastName && (
+                                            <div className="input-feedback">{errors.lastName}</div>
+                                        )}
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            id="email"
+                                            label="Email Address"
+                                            name="email"
+                                            autoComplete="email"
+                                            value={values.email}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={errors.email && touched.email && "error"}
+                                        />
+                                        {errors.email && touched.email && (
+                                            <div className="input-feedback">{errors.email}</div>
+                                        )}
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            name="password"
+                                            label="Password"
+                                            type="password"
+                                            id="password"
+                                            autoComplete="current-password"
+                                            value={values.password}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className={errors.password && touched.password && "error"}
+                                        />
+                                        {errors.password && touched.password && (
+                                            <div className="input-feedback">{errors.password}</div>
+                                        )}
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        variant="outlined"
-                                        required
-                                        fullWidth
-                                        id="lastName"
-                                        label="Last Name"
-                                        name="lastName"
-                                        autoComplete="lname"
-                                    />
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.submit}
+                                    disabled={isSubmitting}
+                                >
+                                    Sign Up
+                                </Button>
+                                <Grid container justify="flex-end">
+                                    <Grid item>
+                                        <Link href="http://localhost:3000" variant="body2">
+                                            Already have an account? Sign in
+                                        </Link>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        variant="outlined"
-                                        required
-                                        fullWidth
-                                        id="email"
-                                        label="Email Address"
-                                        name="email"
-                                        autoComplete="email"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        variant="outlined"
-                                        required
-                                        fullWidth
-                                        name="password"
-                                        label="Password"
-                                        type="password"
-                                        id="password"
-                                        autoComplete="current-password"
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
-                            >
-                                Sign Up
-                        </Button>
-                            <Grid container justify="flex-end">
-                                <Grid item>
-                                    <Link href="http://localhost:3000" variant="body2">
-                                        Already have an account? Sign in
-                                </Link>
-                                </Grid>
-                            </Grid>
-                        </form>
-                    </div>
-                </Paper>
-            </Container>
+                            </form>
+                        </div>
+                    </Paper>
+                </Container>
             )}
         </Formik>
     );
