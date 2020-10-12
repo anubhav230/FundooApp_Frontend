@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
@@ -49,10 +48,10 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema = Yup.object().shape({
     password: Yup.string()
-        .min(4, "Must have minimum 4 Charachters")
+        .min(8, "Must have minimum 8 Charachters")
         .required("Password required!").matches(/(?=.*[0-9])/, "Password must contain a number."),
     confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'confirm password should be same as new passwprd')
+        .oneOf([Yup.ref('password'), null], 'confirm password should be same as new password')
         .required()
 });
 
@@ -70,7 +69,7 @@ export default function ResetPassword() {
                             <div className={classes.paper}>
                                 <img src={Logo} />
                                 <Typography component="h1" variant="h5">
-                                    Reset Password
+                                    Change password
                                 </Typography>
                                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                                     <TextField
@@ -121,7 +120,7 @@ export default function ResetPassword() {
                                     <Grid container>
                                         <Grid item xs>
                                             <span href="#" variant="body2">
-                                                New password and confirm password should be same 
+                                                New password and confirm password should be same
                                             </span>
                                         </Grid>
                                     </Grid>

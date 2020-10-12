@@ -12,9 +12,9 @@ function App() {
         <Router>
             <Switch>
                 <Route exact path="/" component={LoginIn} />
-                <Route path="/register" component={SignUp} />
-                <Route path="/forgetpassword" component={ForgetPassword} />
-                <Route path="/resetpassword" component={ResetPassword} />
+                <Route exact path="/register" component={SignUp} />
+                <Route exact path="/forgetpassword" component={ForgetPassword} />
+                <Route exact path="/resetpassword" component={ResetPassword} />
                 <Route component={Error} />
             </Switch>
         </Router>
