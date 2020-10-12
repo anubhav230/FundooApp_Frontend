@@ -44,9 +44,6 @@ const useStyles = makeStyles((theme) => ({
     error: {
         backgroundColor: "red"
     },
-    // span2:{
-    //     marginTop: theme.spacing(6),
-    // }
 }));
 
 

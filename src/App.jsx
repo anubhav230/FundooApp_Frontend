@@ -5,6 +5,7 @@ import LoginIn from './components/Login'
 import Error from './components/Error'
 import SignUp from './components/Register'
 import ForgetPassword from './components/ForgetPassword'
+import ResetPassword from './components/ResetPassword'
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                 <Route exact path="/" component={LoginIn} />
                 <Route path="/register" component={SignUp} />
                 <Route path="/forgetpassword" component={ForgetPassword} />
+                <Route path="/resetpassword" component={ResetPassword} />
                 <Route component={Error} />
             </Switch>
         </Router>
