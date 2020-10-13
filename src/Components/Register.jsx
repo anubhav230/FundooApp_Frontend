@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -11,8 +11,7 @@ import Logo from '../../src/image/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
 import {Formik} from "formik";
 import * as Yup from "yup";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faEye } from '@fortawesome/free-solid-svg-icons'
+import service from '../services/user'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -58,12 +57,37 @@ const validationSchema = Yup.object().shape({
 export default function SignUp() {
     const classes = useStyles();
 
+    // const [user, setUser] = useState({
+    //     firstName: "",
+    //     lastName: "",
+    //     email: "",
+    //     password: "",
+    // });
+
+    // const onChangeUser = (e) => {
+    //     setUser({...user, [e.target.name]: e.target.value})
+    // }
+
+    // const onSubmitNewUser = (e) => {
+    //     e.preventDefault();
+    //     service.register(user)
+    //     .then((user)=>{
+    //         console.log(user)
+    //       if (user.status === 200) {     
+    //         alert('new user registered');
+    //       }
+    //     })
+    //     .catch((err)=>{
+    //       alert('error while user registration')
+    //     });
+    // }
+
     return (
 
         <Formik initialValues={{firstName: "", lastName: "", email: "", password: ""}}
             validationSchema={validationSchema}
         >
-            {({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
+            {({values, errors, touched, handleChange, handleBlur, handleSubmit}) => (
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                     <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -73,7 +97,7 @@ export default function SignUp() {
                             <Typography component="h1" variant="h5">
                                 Create your Fundoo Account
                             </Typography>
-                            <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                            <form className={classes.form} noValidate >
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm={6}>
                                         <TextField
@@ -86,8 +110,9 @@ export default function SignUp() {
                                             label="First Name"
                                             autoFocus
                                             value={values.firstName}
-                                            onChange={handleChange}
+                                            onInput={handleChange}
                                             onBlur={handleBlur}
+                                            // onChange={onChangeUser}
                                             className={errors.firstName && touched.firstName && "error"}
                                         />
                                         {errors.firstName && touched.firstName && (
@@ -104,8 +129,9 @@ export default function SignUp() {
                                             name="lastName"
                                             autoComplete="lname"
                                             value={values.lastName}
-                                            onChange={handleChange}
+                                            onInput={handleChange}
                                             onBlur={handleBlur}
+                                            // onChange={onChangeUser}
                                             className={errors.lastName && touched.lastName && "error"}
                                         />
                                         {errors.lastName && touched.lastName && (
@@ -122,8 +148,9 @@ export default function SignUp() {
                                             name="email"
                                             autoComplete="email"
                                             value={values.email}
-                                            onChange={handleChange}
+                                            onInput={handleChange}
                                             onBlur={handleBlur}
+                                            // onChange={onChangeUser}
                                             className={errors.email && touched.email && "error"}
                                         />
                                         {errors.email && touched.email && (
@@ -141,8 +168,9 @@ export default function SignUp() {
                                             id="password"
                                             autoComplete="current-password"
                                             value={values.password}
-                                            onChange={handleChange}
+                                            onInput={handleChange}
                                             onBlur={handleBlur}
+                                            // onChange={onChangeUser}
                                             className={errors.password && touched.password && "error"}
                                         />
                                         {errors.password && touched.password && (
@@ -160,8 +188,9 @@ export default function SignUp() {
                                             id="confirmPassword"
                                             autoComplete="current-password"
                                             value={values.confirmPassword}
-                                            onChange={handleChange}
+                                            onInput={handleChange}
                                             onBlur={handleBlur}
+                                            // onChange={onChangeUser}
                                             className={errors.confirmPassword && touched.confirmPassword && "error"}
                                         />
                                         {errors.confirmPassword && touched.confirmPassword && (
@@ -175,7 +204,7 @@ export default function SignUp() {
                                     variant="contained"
                                     color="primary"
                                     className={classes.submit}
-                                    disabled={isSubmitting}
+                                    // disabled={isSubmitting}
                                 >
                                     Sign Up
                                 </Button>

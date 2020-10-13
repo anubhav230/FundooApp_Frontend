@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -11,6 +11,7 @@ import Logo from '../../src/image/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
 import {Formik} from "formik";
 import * as Yup from "yup";
+import service from '../services/user'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -51,16 +52,35 @@ const validationSchema = Yup.object().shape({
     email: Yup.string().email().required("Email required!"),
     password: Yup.string()
         .min(4, "Must have minimum 4 Charachters")
-        .required("Password required!").matches(/(?=.*[0-9])/, "Password must contain a number."),
+        .required("Password required!").matches(/(?=.*[A-Z])/, "Password must contain a number."),
 });
 
 export default function SignIn() {
     const classes = useStyles();
+
+    const [user, setUser] = useState({email: "", password: ""});
+
+    const onChangeUser = event => {
+        setUser({...user, [event.target.name]: event.target.value})
+    }
+
+    const onSubmitSignIN = (e)=>{
+        e.preventDefault();
+        service.signin(user).then((user)=>{
+            console.log()
+          if (user.status === 200) {     
+            alert('Login Successfully');
+          }
+        }).catch((err)=>{
+          alert('Invalid Credentials');
+        });
+      }
+
     return (
         <Formik
             initialValues={{email: "", password: ""}}
             validationSchema={validationSchema}>
-                {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
+            {({values, errors, touched, handleBlur, handleChange}) => (
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                     <main className={classes.layout}>
@@ -70,7 +90,7 @@ export default function SignIn() {
                                 <Typography component="h1" variant="h5">
                                     Sign in
                                 </Typography>
-                                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                                <form className={classes.form} noValidate onSubmit={onSubmitSignIN}>
                                     <TextField
                                         variant="outlined"
                                         margin="normal"
@@ -82,9 +102,11 @@ export default function SignIn() {
                                         autoComplete="email"
                                         autoFocus
                                         value={values.email}
-                                        onChange={handleChange}
+                                        onInput={handleChange}
                                         onBlur={handleBlur}
+                                        onChange={onChangeUser}
                                         className={errors.email && touched.email && "error"}
+
                                     />
                                     {errors.email && touched.email && (
                                         <div className="input-feedback">{errors.email}</div>
@@ -100,8 +122,9 @@ export default function SignIn() {
                                         id="password"
                                         autoComplete="current-password"
                                         value={values.password}
-                                        onChange={handleChange}
+                                        onInput={handleChange}
                                         onBlur={handleBlur}
+                                        onChange={onChangeUser}
                                         className={errors.password && touched.password && "error"}
                                     />
                                     {errors.password && touched.password && (
@@ -113,13 +136,13 @@ export default function SignIn() {
                                         variant="contained"
                                         color="primary"
                                         className={classes.submit}
-                                        disabled={isSubmitting}
+                                    // disabled={isSubmitting}
                                     >
                                         Sign In
                                     </Button>
                                     <Grid container>
                                         <Grid item xs>
-                                            <Link href="#" variant="body2">
+                                            <Link href="http://localhost:3000/forgetpassword" variant="body2">
                                                 Forgot password?
                                     </Link>
                                         </Grid>
@@ -134,7 +157,7 @@ export default function SignIn() {
                         </Paper>
                     </main>
                 </Container>
-                )}
+            )}
         </Formik>
     )
 }
