@@ -64,17 +64,16 @@ export default function SignIn() {
         setUser({...user, [event.target.name]: event.target.value})
     }
 
-    const onSubmitSignIN = (e)=>{
-        e.preventDefault();
-        service.signin(user).then((user)=>{
-            console.log()
-          if (user.status === 200) {     
-            alert('Login Successfully');
-          }
-        }).catch((err)=>{
-          alert('Invalid Credentials');
+    const onSubmit = event => {
+        event.preventDefault();
+        service.signin(user).then(user => {
+            if (user.status === 200) {
+                alert('Login Successfully');
+            }
+        }).catch(() => {
+            alert('Invalid Credentials');
         });
-      }
+    }
 
     return (
         <Formik
@@ -90,7 +89,7 @@ export default function SignIn() {
                                 <Typography component="h1" variant="h5">
                                     Sign in
                                 </Typography>
-                                <form className={classes.form} noValidate onSubmit={onSubmitSignIN}>
+                                <form className={classes.form} noValidate onSubmit={onSubmit}>
                                     <TextField
                                         variant="outlined"
                                         margin="normal"
