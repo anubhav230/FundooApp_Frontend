@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -10,6 +10,7 @@ import Logo from '../../src/image/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
 import {Formik} from "formik";
 import * as Yup from "yup";
+import service from '../services/user'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema = Yup.object().shape({
     password: Yup.string()
-        .min(8, "Must have minimum 8 Charachters")
+        .min(4, "Must have minimum 4 Charachters")
         .required("Password required!").matches(/(?=.*[0-9])/, "Password must contain a number."),
     confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], 'confirm password should be same as new password')
@@ -57,11 +58,25 @@ const validationSchema = Yup.object().shape({
 
 export default function ResetPassword() {
     const classes = useStyles();
-    return (
+
+    const [user, setUser] = useState({ password: ""});
+
+    const onChangeUser = event => {
+        setUser({...user, [event.target.name]: event.target.value})
+    }
+
+    const onSubmitResetPassword = (e) => {
+        e.preventDefault();
+        console.log(user)
+        user['token']=window.location.pathname.split('/')[2]
+        service.resetpassword(user);
+      }
+
+    return (            
         <Formik
             initialValues={{email: "", password: ""}}
             validationSchema={validationSchema}>
-            {({values, errors, touched, handleChange, handleBlur, handleSubmit}) => (
+            {({values, errors, touched, handleChange, handleBlur}) => (
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                     <main className={classes.layout}>
@@ -71,20 +86,21 @@ export default function ResetPassword() {
                                 <Typography component="h1" variant="h5">
                                     Change password
                                 </Typography>
-                                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                                <form className={classes.form} noValidate onSubmit={onSubmitResetPassword}>
                                     <TextField
                                         variant="outlined"
                                         margin="normal"
                                         required
                                         fullWidth
                                         name="password"
-                                        label="new Password"
+                                        label="newPassword"
                                         type="password"
                                         id="password"
                                         autoComplete="current-password"
                                         value={values.password}
-                                        onChange={handleChange}
+                                        onInput={handleChange}
                                         onBlur={handleBlur}
+                                        onChange={onChangeUser}
                                         className={errors.password && touched.password && "error"}
                                     />
                                     {errors.password && touched.password && (
@@ -101,7 +117,7 @@ export default function ResetPassword() {
                                         id="confirmPassword"
                                         autoComplete="current-password"
                                         value={values.confirmPassword}
-                                        onChange={handleChange}
+                                        onInput={handleChange}
                                         onBlur={handleBlur}
                                         className={errors.confirmPassword && touched.confirmPassword && "error"}
                                     />

@@ -1,22 +1,29 @@
-import Axios from 'axios';
+import axios from 'axios';
 
 const URL = "http://localhost:4000"
 
 class UserService {
 
     signin(data) {
-        return Axios.post(URL + '/login', data)
+        return axios.post(URL + '/login', data)
     }
 
     register(data) {
         // console.log(data)
-        return Axios.post(URL + '/register', data)
+        return axios.post(URL + '/register', data)
     }
 
     forgetpassword(data){
         console.log(data)
-        return Axios.post(URL + '/forgot-password', data)
+        return axios.post(URL + `/forgot-password`, data)
     }
+
+    resetpassword(data){
+        console.log('////fron axios'+data)
+        return axios.post(URL + `/reset-password/token=`, data)
+    }
+
+
 }
 
 export default new UserService();
