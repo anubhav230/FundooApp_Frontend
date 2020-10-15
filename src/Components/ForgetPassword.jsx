@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
@@ -11,6 +10,7 @@ import Logo from '../../src/image/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
 import {Formik} from "formik";
 import * as Yup from "yup";
+import service from '../services/user'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -53,6 +53,18 @@ const validationSchema = Yup.object().shape({
 
 export default function ForgetPassword() {
     const classes = useStyles();
+
+    const [user, setUser] = useState({email: ""});
+
+    const onChangeUser = event => {
+        setUser({...user, [event.target.name]: event.target.value})
+    }
+
+    const onSubmitForgetPassword = event => {
+        event.preventDefault();
+        service.forgetpassword(user);
+    }
+
     return (
         <Formik
             initialValues={{email: "", password: ""}}
@@ -70,7 +82,7 @@ export default function ForgetPassword() {
                                 <span className={classes.span2}>
                                     Enter your recovery email
                                 </span>
-                                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                                <form className={classes.form} noValidate onSubmit={onSubmitForgetPassword}>
                                     <TextField
                                         variant="outlined"
                                         margin="normal"
@@ -82,8 +94,9 @@ export default function ForgetPassword() {
                                         autoComplete="email"
                                         autoFocus
                                         value={values.email}
-                                        onChange={handleChange}
+                                        onInput={handleChange}
                                         onBlur={handleBlur}
+                                        onChange={onChangeUser}
                                         className={errors.email && touched.email && "error"}
                                     />
                                     {errors.email && touched.email && (

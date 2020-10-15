@@ -9,13 +9,13 @@ class UserService {
     }
 
     register(data) {
-        console.log(data)
+        // console.log(data)
         return Axios.post(URL + '/register', data)
     }
 
     forgetpassword(data){
         console.log(data)
-        return Axios.post(URL + '/register', data)
+        return Axios.post(URL + '/forgot-password', data)
     }
 }
 
