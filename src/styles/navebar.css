@@ -1,5 +1,7 @@
 .custom-nav-bar {
-    background-color: rgb(245, 242, 237);
+    display: inline;
+    background-color: white;
+    background-color: rgb(248, 248, 247);
     display: flex;
 }
 
@@ -12,4 +14,32 @@
 
 .custom-brand {
     font-size: 25px;
+}
+
+.searchBar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    padding-right: 140px;
+}
+
+.refresh {
+    display: flex;
+    padding-left: 300px;
+    color: rgb(56, 54, 54);
+}
+
+.list {
+    display: flex;
+    padding-left: 0px;
+}
+
+.settings {
+    display: flex;
+    padding-left: 0px;
+}
+
+.apps {
+    display: flex;
+    padding-left: 0px;
 }
