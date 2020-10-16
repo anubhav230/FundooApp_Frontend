@@ -19,11 +19,9 @@ class UserService {
     }
 
     resetpassword(data){
-        console.log('////fron axios'+data)
+        console.log(data)
         return axios.post(URL + `/reset-password/token=`, data)
     }
-
-
 }
 
 export default new UserService();

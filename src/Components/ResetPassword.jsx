@@ -6,11 +6,13 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Logo from '../../src/image/fundoologo.jpg';
+import Logo from '../../src/Assets/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
 import {Formik} from "formik";
 import * as Yup from "yup";
 import service from '../services/user'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -56,10 +58,11 @@ const validationSchema = Yup.object().shape({
         .required()
 });
 
+toast.configure()
 export default function ResetPassword() {
     const classes = useStyles();
 
-    const [user, setUser] = useState({ password: ""});
+    const [user, setUser] = useState({password: ""});
 
     const onChangeUser = event => {
         setUser({...user, [event.target.name]: event.target.value})
@@ -68,11 +71,18 @@ export default function ResetPassword() {
     const onSubmitResetPassword = (e) => {
         e.preventDefault();
         console.log(user)
-        user['token']=window.location.pathname.split('/')[2]
-        service.resetpassword(user);
-      }
+        user['token'] = window.location.pathname.split('/')[2]
+        service.resetpassword(user)
+        .then(user => {
+            if (user.status === 200) {
+                toast.success('Password changed', {position: toast.POSITION.TOP_CENTER});
+            }
+        }).catch(() => {
+            toast.error('error while changing Password', {position: toast.POSITION.TOP_CENTER});
+        });
+    }
 
-    return (            
+    return (
         <Formik
             initialValues={{email: "", password: ""}}
             validationSchema={validationSchema}>
@@ -131,7 +141,7 @@ export default function ResetPassword() {
                                         color="primary"
                                         className={classes.submit}
                                     >
-                                        Sign In
+                                        Reset
                                     </Button>
                                     <Grid container>
                                         <Grid item xs>

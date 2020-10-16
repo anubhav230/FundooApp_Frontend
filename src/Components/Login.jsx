@@ -7,11 +7,13 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Logo from '../../src/image/fundoologo.jpg';
+import Logo from '../../src/Assets/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
 import {Formik} from "formik";
 import * as Yup from "yup";
 import service from '../services/user'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -52,10 +54,11 @@ const validationSchema = Yup.object().shape({
     email: Yup.string().email().required("Email required!"),
     password: Yup.string()
         .min(4, "Must have minimum 4 Charachters")
-        .required("Password required!").matches(/(?=.*[A-Z])/, "Password must contain a number."),
+        .required("Password required!").matches(/(?=.*[0-9])/, "Password must contain a number."),
 });
 
-export default function SignIn() {
+toast.configure()
+export default function SignIn(props) {
     const classes = useStyles();
 
     const [user, setUser] = useState({email: "", password: ""});
@@ -66,20 +69,22 @@ export default function SignIn() {
 
     const onSubmit = event => {
         event.preventDefault();
-        service.signin(user).then(user => {
-            if (user.status === 200) {
-                alert('Login Successfully');
-            }
-        }).catch(() => {
-            alert('Invalid Credentials');
-        });
+        service.signin(user)
+            .then(user => {
+                if (user.status === 200) {
+                    toast.success('Login Successfully!', {position: toast.POSITION.TOP_CENTER});
+                }
+                props.history.push('/Dashboard');
+            }).catch(() => {
+                toast.error('Invalid Credentials', {position: toast.POSITION.TOP_CENTER});
+            });
     }
 
     return (
         <Formik
             initialValues={{email: "", password: ""}}
             validationSchema={validationSchema}>
-            {({values, errors, touched, handleBlur, handleChange}) => (
+            {({values, errors, touched, handleBlur, handleChange, isSubmitting}) => (
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                     <main className={classes.layout}>
@@ -135,7 +140,7 @@ export default function SignIn() {
                                         variant="contained"
                                         color="primary"
                                         className={classes.submit}
-                                    // disabled={isSubmitting}
+                                        disabled={isSubmitting}
                                     >
                                         Sign In
                                     </Button>

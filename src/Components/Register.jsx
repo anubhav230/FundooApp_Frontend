@@ -7,11 +7,13 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Logo from '../../src/image/fundoologo.jpg';
+import Logo from '../../src/Assets/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
 import {Formik} from "formik";
 import * as Yup from "yup";
 import service from '../services/user'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -55,6 +57,7 @@ const validationSchema = Yup.object().shape({
         .required()
 });
 
+toast.configure()
 export default function SignUp() {
     const classes = useStyles(); // 
 
@@ -74,13 +77,12 @@ export default function SignUp() {
         service.register(user)
             .then((user) => {
                 console.log(user)
-                // if (user.status === 200) {
-                //     alert('new user registered');
-                // }
-                alert('new user registered');
+                if (user.status === 200) {
+                    toast.success('New user Successfully registered', {position: toast.POSITION.TOP_CENTER});
+                };
             })
-            .catch((err) => {
-                alert('error while user registration')
+            .catch(() => {
+                toast.error('Prease Enter valid Credentials', {position: toast.POSITION.TOP_CENTER});
             });
     }
 
