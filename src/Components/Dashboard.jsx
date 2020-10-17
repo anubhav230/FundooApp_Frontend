@@ -7,6 +7,7 @@ import {FiSettings} from "react-icons/fi";
 import {BsViewList} from "react-icons/bs";
 import {GrApps} from "react-icons/gr";
 import {CgProfile} from "react-icons/cg";
+import {HiOutlineMenu} from "react-icons/hi";
 import "../styles/navebar.css"
 import {AiOutlineSearch} from "react-icons/ai";
 
@@ -18,6 +19,11 @@ class Dashboard extends Component {
         return (
             <>
                 <Navbar variant="default" className="custom-nav-bar" >
+                <div className='outline'>
+                        <Button className='btn-light btn-circle btn-sm-outline'>
+                            <HiOutlineMenu size='25px'> </HiOutlineMenu>
+                        </Button>
+                    </div>
                     <Navbar.Brand><img
                         src={logo}
                         alt="Imge"
