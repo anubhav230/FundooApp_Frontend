@@ -13,12 +13,12 @@ class UserService {
         return axios.post(URL + '/register', data)
     }
 
-    forgetpassword(data){
+    forgetpassword(data) {
         console.log(data)
         return axios.post(URL + `/forgot-password`, data)
     }
 
-    resetpassword(data){
+    resetpassword(data) {
         console.log(data)
         return axios.post(URL + `/reset-password/token=`, data)
     }

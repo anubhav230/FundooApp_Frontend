@@ -1,7 +1,6 @@
 .custom-nav-bar {
     display: flex;
-    /* display: inline; */
-    background-color: rgb(250, 250, 246);
+    background-color: rgb(238, 238, 238);
 }
 
 .custom-image {
@@ -15,7 +14,7 @@
     margin-top: 12px;
     margin-bottom: 5px;
     font-size: 23px;
-    color: rgb(77, 74, 74);
+    color: rgb(61, 60, 60);
 }
 
 .searchBar {
@@ -66,8 +65,7 @@
     display: flex;
     margin-left: 80px;
     margin-top: 10px;
-    color: rgb(73, 71, 71);
-    padding-top: 0;
+    color: rgb(77, 74, 74);
     border: none;
     background: none;
 }
@@ -76,7 +74,7 @@
     display: flex;
     margin-left: 15px;
     margin-top: 10px;
-    color: rgb(73, 71, 71);
+    color: rgb(78, 78, 78);
     padding-top: 0;
     border: none;
     background: none;

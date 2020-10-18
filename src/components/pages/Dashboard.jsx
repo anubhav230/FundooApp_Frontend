@@ -1,25 +1,21 @@
 import React from 'react';
 import {Component} from 'react';
-import {Navbar, Form, FormControl, Button} from 'react-bootstrap';
-import logo from '../Assets/googlekeep.jpg';
+import {Navbar, FormControl, Button} from 'react-bootstrap';
+import logo from '../../Assets/googlekeep.jpg';
 import {IoIosRefresh} from "react-icons/io";
 import {FiSettings} from "react-icons/fi";
 import {BsViewList} from "react-icons/bs";
 import {GrApps} from "react-icons/gr";
 import {CgProfile} from "react-icons/cg";
 import {HiOutlineMenu} from "react-icons/hi";
-import "../styles/navebar.css"
-import {AiOutlineSearch} from "react-icons/ai";
-
-// import DrawerToggleButton from "./DrawerToggleButton";
-
+import '../../styles/navebar.css'
 
 class Dashboard extends Component {
     render() {
         return (
             <>
                 <Navbar variant="default" className="custom-nav-bar" >
-                <div className='outline'>
+                    <div className='outline'>
                         <Button className='btn-light btn-circle btn-sm-outline'>
                             <HiOutlineMenu size='25px'> </HiOutlineMenu>
                         </Button>
@@ -28,7 +24,6 @@ class Dashboard extends Component {
                         src={logo}
                         alt="Imge"
                         className="custom-image" />
-
                     </Navbar.Brand>
                     <span className="custom-brand">
                         Notes

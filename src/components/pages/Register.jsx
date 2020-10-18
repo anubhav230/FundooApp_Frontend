@@ -7,11 +7,11 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Logo from '../../src/Assets/fundoologo.jpg';
+import Logo from '../../Assets/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
 import {Formik} from "formik";
 import * as Yup from "yup";
-import service from '../services/user'
+import service from '../../services/user'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 
@@ -81,8 +81,8 @@ export default function SignUp() {
                     toast.success('New user Successfully registered', {position: toast.POSITION.TOP_CENTER});
                 };
             })
-            .catch(() => {
-                toast.error('Prease Enter valid Credentials', {position: toast.POSITION.TOP_CENTER});
+            .catch((err) => {
+                toast.error(`Prease Enter valid Credentials`, {position: toast.POSITION.TOP_CENTER});
             });
     }
 

@@ -2,16 +2,15 @@ import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Logo from '../../src/Assets/fundoologo.jpg';
+import Logo from '../../Assets/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
 import {Formik} from "formik";
 import * as Yup from "yup";
-import service from '../services/user'
+import service from '../../services/user'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 
@@ -46,45 +45,41 @@ const useStyles = makeStyles((theme) => ({
     },
     error: {
         backgroundColor: "red"
-    }
+    },
 }));
 
 
 const validationSchema = Yup.object().shape({
-    email: Yup.string().email().required("Email required!"),
-    password: Yup.string()
-        .min(4, "Must have minimum 4 Charachters")
-        .required("Password required!").matches(/(?=.*[0-9])/, "Password must contain a number."),
+    email: Yup.string().email().required("Email required!")
 });
 
 toast.configure()
-export default function SignIn(props) {
+export default function ForgetPassword() {
     const classes = useStyles();
 
-    const [user, setUser] = useState({email: "", password: ""});
+    const [user, setUser] = useState({email: ""});
 
     const onChangeUser = event => {
         setUser({...user, [event.target.name]: event.target.value})
     }
 
-    const onSubmit = event => {
+    const onSubmitForgetPassword = event => {
         event.preventDefault();
-        service.signin(user)
-            .then(user => {
-                if (user.status === 200) {
-                    toast.success('Login Successfully!', {position: toast.POSITION.TOP_CENTER});
-                }
-                props.history.push('/Dashboard');
-            }).catch(() => {
-                toast.error('Invalid Credentials', {position: toast.POSITION.TOP_CENTER});
-            });
+        service.forgetpassword(user)
+        .then(user => {
+            if (user.status === 200) {
+                toast.success('Reset passwored link sent to your email', {position: toast.POSITION.TOP_CENTER});
+            }
+        }).catch(() => {
+            toast.error('Please inter correct email', {position: toast.POSITION.TOP_CENTER});
+        });
     }
 
     return (
         <Formik
             initialValues={{email: "", password: ""}}
             validationSchema={validationSchema}>
-            {({values, errors, touched, handleBlur, handleChange, isSubmitting}) => (
+            {({values, errors, touched, handleChange, handleBlur, handleSubmit}) => (
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                     <main className={classes.layout}>
@@ -92,16 +87,19 @@ export default function SignIn(props) {
                             <div className={classes.paper}>
                                 <img src={Logo} />
                                 <Typography component="h1" variant="h5">
-                                    Sign in
+                                    Find your email
                                 </Typography>
-                                <form className={classes.form} noValidate onSubmit={onSubmit}>
+                                <span className={classes.span2}>
+                                    Enter your recovery email
+                                </span>
+                                <form className={classes.form} noValidate onSubmit={onSubmitForgetPassword}>
                                     <TextField
                                         variant="outlined"
                                         margin="normal"
                                         required
                                         fullWidth
                                         id="email"
-                                        label="Email Address"
+                                        label="Enter your email asddress"
                                         name="email"
                                         autoComplete="email"
                                         autoFocus
@@ -110,29 +108,9 @@ export default function SignIn(props) {
                                         onBlur={handleBlur}
                                         onChange={onChangeUser}
                                         className={errors.email && touched.email && "error"}
-
                                     />
                                     {errors.email && touched.email && (
                                         <div className="input-feedback">{errors.email}</div>
-                                    )}
-                                    <TextField
-                                        variant="outlined"
-                                        margin="normal"
-                                        required
-                                        fullWidth
-                                        name="password"
-                                        label="Password"
-                                        type="password"
-                                        id="password"
-                                        autoComplete="current-password"
-                                        value={values.password}
-                                        onInput={handleChange}
-                                        onBlur={handleBlur}
-                                        onChange={onChangeUser}
-                                        className={errors.password && touched.password && "error"}
-                                    />
-                                    {errors.password && touched.password && (
-                                        <div className="input-feedback">{errors.password}</div>
                                     )}
                                     <Button
                                         type="submit"
@@ -140,20 +118,15 @@ export default function SignIn(props) {
                                         variant="contained"
                                         color="primary"
                                         className={classes.submit}
-                                        // disabled={isSubmitting}
+                                        disabled={onSubmitForgetPassword}
                                     >
-                                        Sign In
+                                        Send
                                     </Button>
                                     <Grid container>
                                         <Grid item xs>
-                                            <Link href="http://localhost:3000/forgetpassword" variant="body2">
-                                                Forgot password?
-                                    </Link>
-                                        </Grid>
-                                        <Grid item>
-                                            <Link href="http://localhost:3000/register" variant="body2">
-                                                {"Don't have an account? Sign Up"}
-                                            </Link>
+                                            <span>
+                                                Reset password link will be sent on your mail
+                                            </span>
                                         </Grid>
                                     </Grid>
                                 </form>

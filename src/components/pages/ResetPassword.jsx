@@ -6,13 +6,14 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Logo from '../../src/Assets/fundoologo.jpg';
+import Logo from '../../Assets/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
 import {Formik} from "formik";
 import * as Yup from "yup";
-import service from '../services/user'
+import service from '../../services/user'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -45,33 +46,40 @@ const useStyles = makeStyles((theme) => ({
     },
     error: {
         backgroundColor: "red"
-    },
+    }
 }));
 
 
 const validationSchema = Yup.object().shape({
-    email: Yup.string().email().required("Email required!")
+    password: Yup.string()
+        .min(4, "Must have minimum 4 Charachters")
+        .required("Password required!").matches(/(?=.*[0-9])/, "Password must contain a number."),
+    confirmPassword: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'confirm password should be same as new password')
+        .required()
 });
 
 toast.configure()
-export default function ForgetPassword() {
+export default function ResetPassword() {
     const classes = useStyles();
 
-    const [user, setUser] = useState({email: ""});
+    const [user, setUser] = useState({password: ""});
 
     const onChangeUser = event => {
         setUser({...user, [event.target.name]: event.target.value})
     }
 
-    const onSubmitForgetPassword = event => {
-        event.preventDefault();
-        service.forgetpassword(user)
+    const onSubmitResetPassword = (e) => {
+        e.preventDefault();
+        console.log(user)
+        user['token'] = window.location.pathname.split('/')[2]
+        service.resetpassword(user)
         .then(user => {
             if (user.status === 200) {
-                toast.success('Reset passwored link sent to your email', {position: toast.POSITION.TOP_CENTER});
+                toast.success('Password changed', {position: toast.POSITION.TOP_CENTER});
             }
         }).catch(() => {
-            toast.error('Please inter correct email', {position: toast.POSITION.TOP_CENTER});
+            toast.error('error while changing Password', {position: toast.POSITION.TOP_CENTER});
         });
     }
 
@@ -79,7 +87,7 @@ export default function ForgetPassword() {
         <Formik
             initialValues={{email: "", password: ""}}
             validationSchema={validationSchema}>
-            {({values, errors, touched, handleChange, handleBlur, handleSubmit}) => (
+            {({values, errors, touched, handleChange, handleBlur}) => (
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                     <main className={classes.layout}>
@@ -87,30 +95,45 @@ export default function ForgetPassword() {
                             <div className={classes.paper}>
                                 <img src={Logo} />
                                 <Typography component="h1" variant="h5">
-                                    Find your email
+                                    Change password
                                 </Typography>
-                                <span className={classes.span2}>
-                                    Enter your recovery email
-                                </span>
-                                <form className={classes.form} noValidate onSubmit={onSubmitForgetPassword}>
+                                <form className={classes.form} noValidate onSubmit={onSubmitResetPassword}>
                                     <TextField
                                         variant="outlined"
                                         margin="normal"
                                         required
                                         fullWidth
-                                        id="email"
-                                        label="Enter your email asddress"
-                                        name="email"
-                                        autoComplete="email"
-                                        autoFocus
-                                        value={values.email}
+                                        name="password"
+                                        label="newPassword"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="current-password"
+                                        value={values.password}
                                         onInput={handleChange}
                                         onBlur={handleBlur}
                                         onChange={onChangeUser}
-                                        className={errors.email && touched.email && "error"}
+                                        className={errors.password && touched.password && "error"}
                                     />
-                                    {errors.email && touched.email && (
-                                        <div className="input-feedback">{errors.email}</div>
+                                    {errors.password && touched.password && (
+                                        <div className="input-feedback">{errors.password}</div>
+                                    )}
+                                    <TextField
+                                        variant="outlined"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        name="confirmPassword"
+                                        label="confirm Password"
+                                        type="password"
+                                        id="confirmPassword"
+                                        autoComplete="current-password"
+                                        value={values.confirmPassword}
+                                        onInput={handleChange}
+                                        onBlur={handleBlur}
+                                        className={errors.confirmPassword && touched.confirmPassword && "error"}
+                                    />
+                                    {errors.confirmPassword && touched.confirmPassword && (
+                                        <div className="input-feedback">{errors.confirmPassword}</div>
                                     )}
                                     <Button
                                         type="submit"
@@ -118,14 +141,13 @@ export default function ForgetPassword() {
                                         variant="contained"
                                         color="primary"
                                         className={classes.submit}
-                                        disabled={onSubmitForgetPassword}
                                     >
-                                        Send
+                                        Reset
                                     </Button>
                                     <Grid container>
                                         <Grid item xs>
-                                            <span>
-                                                Reset password link will be sent on your mail
+                                            <span href="#" variant="body2">
+                                                New password and confirm password should be same
                                             </span>
                                         </Grid>
                                     </Grid>

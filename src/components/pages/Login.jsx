@@ -2,18 +2,18 @@ import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Logo from '../../src/Assets/fundoologo.jpg';
+import Logo from '../../Assets/fundoologo.jpg';
 import Paper from '@material-ui/core/Paper';
 import {Formik} from "formik";
 import * as Yup from "yup";
-import service from '../services/user'
+import service from '../../services/user'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
-
 
 const useStyles = makeStyles((theme) => ({
 
@@ -51,43 +51,40 @@ const useStyles = makeStyles((theme) => ({
 
 
 const validationSchema = Yup.object().shape({
+    email: Yup.string().email().required("Email required!"),
     password: Yup.string()
         .min(4, "Must have minimum 4 Charachters")
         .required("Password required!").matches(/(?=.*[0-9])/, "Password must contain a number."),
-    confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'confirm password should be same as new password')
-        .required()
 });
 
 toast.configure()
-export default function ResetPassword() {
+export default function SignIn(props) {
     const classes = useStyles();
 
-    const [user, setUser] = useState({password: ""});
+    const [user, setUser] = useState({email: "", password: ""});
 
     const onChangeUser = event => {
         setUser({...user, [event.target.name]: event.target.value})
     }
 
-    const onSubmitResetPassword = (e) => {
-        e.preventDefault();
-        console.log(user)
-        user['token'] = window.location.pathname.split('/')[2]
-        service.resetpassword(user)
-        .then(user => {
-            if (user.status === 200) {
-                toast.success('Password changed', {position: toast.POSITION.TOP_CENTER});
-            }
-        }).catch(() => {
-            toast.error('error while changing Password', {position: toast.POSITION.TOP_CENTER});
-        });
+    const onSubmit = event => {
+        event.preventDefault();
+        service.signin(user)
+            .then(user => {
+                if (user.status === 200) {
+                    toast.success('Login Successfully!', {position: toast.POSITION.TOP_CENTER});
+                }
+                props.history.push('/Dashboard');
+            }).catch(() => {
+                toast.error('Invalid Credentials', {position: toast.POSITION.TOP_CENTER});
+            });
     }
 
     return (
         <Formik
             initialValues={{email: "", password: ""}}
             validationSchema={validationSchema}>
-            {({values, errors, touched, handleChange, handleBlur}) => (
+            {({values, errors, touched, handleBlur, handleChange, isSubmitting}) => (
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                     <main className={classes.layout}>
@@ -95,16 +92,36 @@ export default function ResetPassword() {
                             <div className={classes.paper}>
                                 <img src={Logo} />
                                 <Typography component="h1" variant="h5">
-                                    Change password
+                                    Sign in
                                 </Typography>
-                                <form className={classes.form} noValidate onSubmit={onSubmitResetPassword}>
+                                <form className={classes.form} noValidate onSubmit={onSubmit}>
+                                    <TextField
+                                        variant="outlined"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label="Email Address"
+                                        name="email"
+                                        autoComplete="email"
+                                        autoFocus
+                                        value={values.email}
+                                        onInput={handleChange}
+                                        onBlur={handleBlur}
+                                        onChange={onChangeUser}
+                                        className={errors.email && touched.email && "error"}
+
+                                    />
+                                    {errors.email && touched.email && (
+                                        <div className="input-feedback">{errors.email}</div>
+                                    )}
                                     <TextField
                                         variant="outlined"
                                         margin="normal"
                                         required
                                         fullWidth
                                         name="password"
-                                        label="newPassword"
+                                        label="Password"
                                         type="password"
                                         id="password"
                                         autoComplete="current-password"
@@ -117,38 +134,26 @@ export default function ResetPassword() {
                                     {errors.password && touched.password && (
                                         <div className="input-feedback">{errors.password}</div>
                                     )}
-                                    <TextField
-                                        variant="outlined"
-                                        margin="normal"
-                                        required
-                                        fullWidth
-                                        name="confirmPassword"
-                                        label="confirm Password"
-                                        type="password"
-                                        id="confirmPassword"
-                                        autoComplete="current-password"
-                                        value={values.confirmPassword}
-                                        onInput={handleChange}
-                                        onBlur={handleBlur}
-                                        className={errors.confirmPassword && touched.confirmPassword && "error"}
-                                    />
-                                    {errors.confirmPassword && touched.confirmPassword && (
-                                        <div className="input-feedback">{errors.confirmPassword}</div>
-                                    )}
                                     <Button
                                         type="submit"
                                         fullWidth
                                         variant="contained"
                                         color="primary"
                                         className={classes.submit}
+                                        // disabled={isSubmitting}
                                     >
-                                        Reset
+                                        Sign In
                                     </Button>
                                     <Grid container>
                                         <Grid item xs>
-                                            <span href="#" variant="body2">
-                                                New password and confirm password should be same
-                                            </span>
+                                            <Link href="http://localhost:3000/forgetpassword" variant="body2">
+                                                Forgot password?
+                                    </Link>
+                                        </Grid>
+                                        <Grid item>
+                                            <Link href="http://localhost:3000/register" variant="body2">
+                                                {"Don't have an account? Sign Up"}
+                                            </Link>
                                         </Grid>
                                     </Grid>
                                 </form>
