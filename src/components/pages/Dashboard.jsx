@@ -9,9 +9,11 @@ import {GrApps} from "react-icons/gr";
 import {CgProfile} from "react-icons/cg";
 import {HiOutlineMenu} from "react-icons/hi";
 import '../../styles/navebar.css'
-
+import Sidebar from '../Sidebar'
+// import Backdrop from '../Backdrop'
 class Dashboard extends Component {
     render() {
+
         return (
             <>
                 <Navbar variant="default" className="custom-nav-bar" >
@@ -54,6 +56,7 @@ class Dashboard extends Component {
                         </Button>
                     </div>
                 </Navbar>
+                <Sidebar />
             </>
         )
     }
