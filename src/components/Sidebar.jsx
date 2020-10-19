@@ -2,47 +2,58 @@ import React from 'react';
 import {Component} from 'react';
 import '../styles/sidebar.css';
 import {BiBulb, BiArchiveIn, BiTrashAlt} from 'react-icons/bi';
-import { BsPencil, BsBell } from 'react-icons/bs';
-import { FiTrash2 } from 'react-icons/fi';
+import {BsPencil, BsBell} from 'react-icons/bs';
+import {FiTrash2} from 'react-icons/fi';
 
 class Sidebar extends Component {
+
+    state = {
+        color: 'none',
+    }
+
+    onClick = () => this.setState({color: 'green'});
 
     render() {
         return (
             <>
                 <div>
                     <nav className="side-drawer">
-                        <ul className="side-drawer-ul">
-                            <li className="side-drawer-item">
-                                <a href="#" className="side-drawer-link">
+                        <ul className="side-drawer-ul" >
+                            <li className="side-drawer-item"
+                                style={{backgroundColor: this.state.color}}
+                                onClick={this.onChange}
+                            >
+                                <div className="side-drawer-link">
                                     <BiBulb className="icons"></BiBulb>
                                     <span className="side-drawer-text">Notes </span>
-                                </a>
+                                </div>
                             </li>
                             <li>
-                                <a href="#" className="side-drawer-link">
+                                <div className="side-drawer-link">
                                     <BsBell className="icons"></BsBell>
-                                    <span className="side-drawer-text"> Reminders  </span></a>
+                                    <span className="side-drawer-text"> Reminders  </span>
+                                </div>
                             </li>
                             <li>
-                                <a href="#" className="side-drawer-link">
+                                <div className="side-drawer-link">
                                     <BsPencil className="icons"></BsPencil>
-                                    <span className="side-drawer-text">EditLabels</span> </a>
+                                    <span className="side-drawer-text">EditLabels</span>
+                                </div>
                             </li>
-                            
+
                             <li>
-                                <a href="#" className="side-drawer-link">
+                                <div className="side-drawer-link">
                                     <BiArchiveIn className="icons"></BiArchiveIn>
-                                    <span className="side-drawer-text">Archive </span></a>
+                                    <span className="side-drawer-text">Archive </span>
+                                </div>
                             </li>
 
                             <li>
-                                <a href="#" className="side-drawer-link">
+                                <div className="side-drawer-link">
                                     <FiTrash2 className="icons"></FiTrash2>
-                                    <span className="side-drawer-text">Trash </span></a>
-
+                                    <span className="side-drawer-text">Trash </span>
+                                </div>
                             </li>
-
                         </ul>
                     </nav >
                 </div>

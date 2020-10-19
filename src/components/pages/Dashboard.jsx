@@ -10,6 +10,7 @@ import {CgProfile} from "react-icons/cg";
 import {HiOutlineMenu} from "react-icons/hi";
 import '../../styles/navebar.css'
 import Sidebar from '../Sidebar'
+import CreateNote from '../CreateNote'
 // import Backdrop from '../Backdrop'
 class Dashboard extends Component {
     render() {
@@ -57,6 +58,8 @@ class Dashboard extends Component {
                     </div>
                 </Navbar>
                 <Sidebar />
+                <CreateNote/>
+                
             </>
         )
     }
