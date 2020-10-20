@@ -1,5 +1,5 @@
-.create-note {
-    /* margin-top: 1%; */
+/* .create-note {
+
     top: 3rem;
     left: 3rem;
     bottom: 1px;
@@ -13,12 +13,18 @@
     border-radius: 8px;
     box-shadow: 2px 2px 10px 2px gray;
     z-index: 10;
-}
+} */
 
-.create-note-text {
+.title {
     border: none;
-    padding-right: 20%;
+    padding-right: 30%;
     outline: none;
+    margin-bottom: 6px;
+    margin-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 9px;
+    padding-right: 70%;
+    padding-left: 3%;
 }
 
 .create-note2 {
@@ -32,22 +38,24 @@
     margin: auto;
     margin-top: 5%;
     /* margin-bottom: 10%; */
-    padding: 10px;
+    /* padding: 10px; */
     background-color: white;
     border-radius: 8px;
     box-shadow: 2px 2px 10px 2px gray;
     z-index: 10;
 }
 
-.create-note-text2 {
+
+/* .title {
     border: none;
     padding-right: 50%;
-    padding-top: 4%;
+    padding-top: 1%;
     outline: none;
-}
+} */
 
 .create-note-close {
     margin-left: 88%;
+    margin-bottom: 1.5%;
     border: none;
     background: none;
     font-size: medium;

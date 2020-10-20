@@ -72,6 +72,8 @@ export default function SignIn(props) {
         service.signin(user)
             .then(user => {
                 if (user.status === 200) {
+                    console.log(user)
+                    localStorage.setItem('token', user.data.data.token);
                     toast.success('Login Successfully!', {position: toast.POSITION.TOP_CENTER});
                 }
                 props.history.push('/Dashboard');
