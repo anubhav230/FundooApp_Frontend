@@ -20,7 +20,9 @@ class CreateNote extends Component {
                             <input type='text' className='create-note-text' placeholder='Title' />
                             <textarea type='text' className='create-note-text2' placeholder='Take a npte...' />
                         </form>
-                        {/* <button className='create-note-close'>close</button> */}
+                        <button className='create-note-close' onClick={()=>{
+                            this.setState({visible: false, visible2 : true})
+                        }}>close</button>
                     </div> : null}
                 {this.state.visible2 ?
                     <div className='create-note'>

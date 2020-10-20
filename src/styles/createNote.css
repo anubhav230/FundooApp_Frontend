@@ -45,3 +45,14 @@
     padding-top: 4%;
     outline: none;
 }
+
+.create-note-close {
+    margin-left: 88%;
+    border: none;
+    background: none;
+    font-size: medium;
+}
+
+.create-note-close:active {
+    border: none;
+}
