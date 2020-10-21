@@ -30,15 +30,21 @@ class CreateNote extends Component {
             token: token
         }
         console.log(note)
-        service.createNote(note)
-            .then(() => {
-                toast.success('note Created!', {position: toast.POSITION.TOP_CENTER});
+        if(note.title == ""){
+            toast.error('title can not be empty', {position: toast.POSITION.TOP_CENTER});
+        } else{
+            service.createNote(note)
+            .then(user => {
+                console.log(user.data.success)
+                if(user.data.success === true){
+                    toast.success('note Created!', {position: toast.POSITION.TOP_CENTER});
+                }
             })
             .catch(() => {
                 toast.error('note not Created!', {position: toast.POSITION.TOP_CENTER});
             });
-        this.setState({title: "", description: ""});
-
+        }
+        this.setState({description: "", title: ""});
     };
 
     render() {
