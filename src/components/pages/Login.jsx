@@ -76,7 +76,7 @@ export default function SignIn(props) {
                     localStorage.setItem('token', user.data.data.token);
                     toast.success('Login Successfully!', {position: toast.POSITION.TOP_CENTER});
                 }
-                props.history.push('/Dashboard');
+                props.history.push('/dashboard');
             }).catch(() => {
                 toast.error('Invalid Credentials', {position: toast.POSITION.TOP_CENTER});
             });

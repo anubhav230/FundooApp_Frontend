@@ -3,12 +3,13 @@ import {Component} from 'react';
 import '../styles/createNote.css'
 import service from '../services/note'
 import note from '../services/note';
-
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
+toast.configure()
 class CreateNote extends Component {
 
     state = {
         visible: false,
-        // visible2: true,
         note: {
             title: "",
             description: ""
@@ -16,33 +17,33 @@ class CreateNote extends Component {
     }
 
     onChangeUser = event => {
-        this.setState({title: event.target.value})
-        this.setState({description: event.target.value})
+        this.setState({[event.target.name]: event.target.value})
     }
 
-
-    handleSubmit = event => {
-
+    toggleBox = () => {this.setState({visible: true})}
+    
+    handleSubmit = (event) => {
         const token = localStorage.getItem('token')
-        // console.log(note)
         const note = {
             title: this.state.title,
             description: this.state.description,
             token: token
         }
         console.log(note)
-        // event.preventDefault();
-        // service.createNote(note)
-        //     .then(() => {
-        //         console.log("done")
-        //     })
-    }
+        service.createNote(note)
+            .then(() => {
+                toast.success('note Created!', {position: toast.POSITION.TOP_CENTER});
+            })
+            .catch(() => {
+                toast.error('note not Created!', {position: toast.POSITION.TOP_CENTER});
+            });
+        this.setState({title: "", description: ""});
+
+    };
 
     render() {
-        // console.log(this.state.note);
         return (
             <>
-
                 <div className='create-note2'>
                     <form onSubmit={this.handleSubmit} autoComplete='off'>
                         <input
@@ -53,9 +54,7 @@ class CreateNote extends Component {
                             name='title'
                             value={note.title}
                             onChange={this.onChangeUser}
-                            onClick={() => {
-                                this.setState({visible: true}, this.handleSubmit)
-                            }}
+                            onClick={this.toggleBox}
                         />
                         {this.state.visible ?
                             <textarea
@@ -69,24 +68,15 @@ class CreateNote extends Component {
                             /> : null}
                     </form>
                     {this.state.visible ?
-                    <button
-                        className='create-note-close'
-                        type='submit'
-                        onClick={() => {
-                            this.setState({visible: false}, this.handleSubmit)
-                        }}>
-                        close
+                        <button
+                            className='create-note-close'
+                            type='submit'
+                            onClick={() => {
+                                this.setState({visible: false}, this.handleSubmit)
+                            }}>
+                            close
                     </button> : null}
                 </div>
-                {/* {this.state.visible2 ?
-                    <div className='create-note'>
-                        <form
-                            onClick={() => {
-                                this.setState({visible: true, visible2: false})
-                            }}>
-                            <input type='text' className='title' placeholder='Title' />
-                        </form>
-                    </div> : null} */}
             </>
         )
     }
