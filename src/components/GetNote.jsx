@@ -5,6 +5,12 @@ import axios from 'axios';
 import service from '../services/note';
 import '../styles/getNote.css'
 
+import { VscSymbolColor } from 'react-icons/vsc'
+import { BiTrashAlt } from 'react-icons/bi';
+import { MdAddAlert } from 'react-icons/md';
+import { RiUserAddFill, RiInboxArchiveLine } from 'react-icons/ri'
+import { BiImageAlt } from 'react-icons/bi'
+
 class GetNotes extends Component {
 
     state = {
@@ -55,6 +61,13 @@ class GetNotes extends Component {
                                     <div className='note'>
                                         <h4> {data.title}</h4>
                                         <p>{data.description}</p>
+                                        <div className='icons'>
+                                        <button className='iconsCard'><MdAddAlert ></MdAddAlert></button>
+                                        <button className='iconsCard'><RiUserAddFill></RiUserAddFill></button>
+                                        <button className='iconsCard'><VscSymbolColor></VscSymbolColor></button>
+                                        <button className='iconsCard'><BiImageAlt></BiImageAlt></button>
+                                        <button className='iconsCard'><RiInboxArchiveLine></RiInboxArchiveLine></button>
+                                    </div>
                                     </div>
                                 </div>
                             })}
