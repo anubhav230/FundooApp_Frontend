@@ -7,6 +7,12 @@ import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import GetNotes from '../components/GetNote'
 
+import {VscSymbolColor} from 'react-icons/vsc'
+import {BiTrashAlt} from 'react-icons/bi';
+import {MdAddAlert} from 'react-icons/md';
+import {RiUserAddFill, RiInboxArchiveLine} from 'react-icons/ri'
+import {BiImageAlt} from 'react-icons/bi'
+
 toast.configure()
 class CreateNote extends Component {
     state = {
@@ -75,6 +81,13 @@ class CreateNote extends Component {
                             /> : null}
                     </form>
                     {this.state.visible ?
+                    <div className='icons'>
+                        <button className='iconsCard'><MdAddAlert ></MdAddAlert></button>
+                        <button className='iconsCard'><RiUserAddFill></RiUserAddFill></button>
+                        <button className='iconsCard'><VscSymbolColor></VscSymbolColor></button>
+                        <button className='iconsCard'><BiImageAlt></BiImageAlt></button>
+                        <button className='iconsCard'><RiInboxArchiveLine></RiInboxArchiveLine></button>
+                        {this.state.visible ?
                         <button
                             className='create-note-close'
                             type='submit'
@@ -83,6 +96,8 @@ class CreateNote extends Component {
                             }}>
                             close
                     </button> : null}
+                    </div> : null}
+                   
                 </div>
                 <div className='contents'>
                     <GetNotes />
