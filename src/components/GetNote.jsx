@@ -48,9 +48,18 @@ class GetNotes extends Component {
         return (
             <>
                 <div className='noteList'>
-                    <h1>sdfsdfsdf</h1>
-                    {/* <h1>{this.state.note}</h1> */}
-                    <p>{note.description}</p>
+                    {this.state.note ? (
+                        <div>
+                            {this.state.note.data.data.map((data) => {
+                                return <div>
+                                    <div className='note'>
+                                        <h1> {data.title}</h1>
+                                        <p>{data.description}</p>
+                                    </div>
+                                </div>
+                            })}
+                        </div>)
+                        : null}
                 </div>
             </>
         )
