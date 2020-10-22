@@ -6,12 +6,13 @@ import note from '../services/note';
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import GetNotes from '../components/GetNote'
-
+import {GrUndo} from 'react-icons/gr'
+import {GrRedo} from 'react-icons/gr'
 import {VscSymbolColor} from 'react-icons/vsc'
-import {BiTrashAlt} from 'react-icons/bi';
 import {MdAddAlert} from 'react-icons/md';
 import {RiUserAddFill, RiInboxArchiveLine} from 'react-icons/ri'
 import {BiImageAlt} from 'react-icons/bi'
+import Icons from '../components/CardIcon'
 
 toast.configure()
 class CreateNote extends Component {
@@ -81,23 +82,21 @@ class CreateNote extends Component {
                             /> : null}
                     </form>
                     {this.state.visible ?
-                    <div className='icons'>
-                        <button className='iconsCard'><MdAddAlert ></MdAddAlert></button>
-                        <button className='iconsCard'><RiUserAddFill></RiUserAddFill></button>
-                        <button className='iconsCard'><VscSymbolColor></VscSymbolColor></button>
-                        <button className='iconsCard'><BiImageAlt></BiImageAlt></button>
-                        <button className='iconsCard'><RiInboxArchiveLine></RiInboxArchiveLine></button>
-                        {this.state.visible ?
-                        <button
-                            className='create-note-close'
-                            type='submit'
-                            onClick={() => {
-                                this.setState({visible: false}, this.handleSubmit)
-                            }}>
-                            close
+                        <div className='icons'>
+                            <Icons />
+                            <GrUndo className='iconsCard2'></GrUndo>
+                            <GrRedo className='iconsCard2'></GrRedo>
+                            {this.state.visible ?
+                                <button
+                                    className='create-note-close'
+                                    type='submit'
+                                    onClick={() => {
+                                        this.setState({visible: false}, this.handleSubmit)
+                                    }}>
+                                    close
                     </button> : null}
-                    </div> : null}
-                   
+                        </div> : null}
+
                 </div>
                 <div className='contents'>
                     <GetNotes />

@@ -1,5 +1,6 @@
 .side-drawer {
-    position: fixed;
+    margin-top: 30px;
+    position: absolute;
     background: white;
     width: 60%;
     max-width: 300px;

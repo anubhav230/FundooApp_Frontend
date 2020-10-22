@@ -1,91 +1,112 @@
-.custom-nav-bar {
-    display: flex;
-    background-color: rgb(238, 238, 238);
-}
-
-.custom-image {
-    width: 40px;
-    height: 40px;
-    padding-left: 15px;
-    padding-right: 12px;
-}
-
-.custom-brand {
-    margin-top: 12px;
-    margin-bottom: 5px;
-    font-size: 23px;
-    color: rgb(61, 60, 60);
-}
-
-.searchBar {
-    margin-top: 8px;
-    margin-bottom: 8px;
-    margin-left: 80px;
-    padding-right: 200px;
-    border-radius: 6px;
-    background: white;
-    border: none;
-    background-image: url('../Assets/searchIcon.png');
-    background-position: 5px 5px;
-    background-repeat: no-repeat;
-    padding-left: 40px;
-}
-
-.btn-sm-refresh {
-    display: flex;
-    margin-left: 210px;
-    margin-top: 10px;
-    color: rgb(73, 71, 71);
-    padding-top: 0;
-    border: none;
-    background: none;
-}
-
-.btn-sm-list {
-    display: flex;
-    margin-left: 30px;
-    margin-top: 10px;
-    color: rgb(73, 71, 71);
-    padding-top: 0;
-    border: none;
-    background: none;
-}
-
-.btn-sm-settings {
-    display: flex;
-    margin-left: 30px;
-    margin-top: 10px;
-    color: rgb(73, 71, 71);
-    padding-top: 0;
-    border: none;
-    background: none;
-}
-
-.btn-sm-apps {
-    display: flex;
-    margin-left: 80px;
-    margin-top: 10px;
-    color: rgb(77, 74, 74);
-    border: none;
-    background: none;
-}
-
-.btn-sm-profile {
-    display: flex;
-    margin-left: 15px;
-    margin-top: 10px;
-    color: rgb(78, 78, 78);
-    padding-top: 0;
-    border: none;
-    background: none;
-}
-
-.btn-sm-outline {
-    display: flex;
-    margin-left: 15px;
-    margin-top: 10px;
-    color: rgb(73, 71, 71);
-    padding-top: 0;
-    border: none;
-    background: none;
-}
+    .custom-nav-bar {
+        /* position: fixed;
+        margin-top: -125px;
+        padding-right: 10px; */
+        display: flex;
+        background-color: white;
+        box-shadow: 1px 1px 5px 0.5px rgba(107, 95, 95, 0.733);
+        z-index: 5px;
+        z-index: 300px;
+    }
+    
+    .custom-image {
+        width: 40px;
+        height: 40px;
+        margin-top: 6px;
+        padding-left: 15px;
+        padding-right: 12px;
+    }
+    
+    .custom-brand {
+        margin-top: 12px;
+        margin-bottom: 5px;
+        font-size: 23px;
+        color: rgb(61, 60, 60);
+    }
+    
+    .searchBar {
+        margin-top: 8px;
+        margin-bottom: 8px;
+        margin-left: 80px;
+        padding-top: 13px;
+        padding-bottom: 13px;
+        padding-right: 270px;
+        border-radius: 6px;
+        background: rgb(245, 244, 244);
+        border: none;
+        outline: none;
+        background-image: url('../Assets/icon2.png');
+        background-position: 8px 8px;
+        background-repeat: no-repeat;
+        padding-left: 40px;
+        font-size: medium;
+    }
+    
+    .searchBar:hover {
+        box-shadow: 1px 1px 5px 0.5px rgba(88, 83, 83, 0.733);
+    }
+    
+    .searchBar:active {
+        border: none;
+        outline: none;
+        /* box-shadow: 1px 1px 5px 0.5px rgba(88, 83, 83, 0.733); */
+    }
+    
+    .btn-sm-refresh {
+        display: flex;
+        margin-left: 100px;
+        margin-top: 16px;
+        color: rgb(73, 71, 71);
+        padding-top: 0;
+        border: none;
+        background: none;
+    }
+    
+    .btn-sm-list {
+        display: flex;
+        margin-left: 30px;
+        margin-top: 16px;
+        color: rgb(73, 71, 71);
+        padding-top: 0;
+        border: none;
+        background: none;
+    }
+    
+    .btn-sm-settings {
+        display: flex;
+        margin-left: 30px;
+        margin-top: 16px;
+        color: rgb(73, 71, 71);
+        padding-top: 0;
+        border: none;
+        background: none;
+    }
+    
+    .btn-sm-apps {
+        display: flex;
+        margin-left: 80px;
+        margin-top: 16px;
+        color: rgb(77, 74, 74);
+        border: none;
+        background: none;
+    }
+    
+    .btn-sm-profile {
+        display: flex;
+        margin-left: 70px;
+        margin-top: 16px;
+        color: rgb(78, 78, 78);
+        padding-top: 0;
+        border: none;
+        background: none;
+    }
+    
+    .btn-sm-outline {
+        display: flex;
+        margin-left: 15px;
+        margin-top: 16px;
+        color: rgb(73, 71, 71);
+        padding-top: 0;
+        border: none;
+        background: none;
+    }

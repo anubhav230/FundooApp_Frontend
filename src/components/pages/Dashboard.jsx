@@ -29,7 +29,7 @@ class Dashboard extends Component {
                         className="custom-image" />
                     </Navbar.Brand>
                     <span className="custom-brand">
-                        Notes
+                        Fundoonotes
                     </span>
                     <FormControl type="text" placeholder="search" className="searchBar" />
                     <div className='refresh'>
@@ -46,11 +46,11 @@ class Dashboard extends Component {
                             <FiSettings size='25px'></FiSettings>
                         </Button>
                     </div>
-                    <div className='apps'>
+                    {/* <div className='apps'>
                         <Button className='btn-light btn-circle btn-sm-apps'>
                             <GrApps size='25px'></GrApps>
                         </Button>
-                    </div>
+                    </div> */}
                     <div className='profile'>
                         <Button className='btn-light btn-circle btn-sm-profile'>
                             <CgProfile size='25px'></CgProfile>

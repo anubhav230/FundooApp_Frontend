@@ -66,7 +66,7 @@ class Sidebar extends Component {
                     <nav className="side-drawer">
                         <ul className="side-drawer-ul" >
                             <li className="side-drawer-item">
-                                <Link to='/dashboard/notes' className="side-drawer-link" activeclassname="active">
+                                <Link to='/notes' className="side-drawer-link" activeclassname="active">
                                     <BiBulb className="icons"></BiBulb>
                                     <span className="side-drawer-text">Notes </span>
                                 </Link>
