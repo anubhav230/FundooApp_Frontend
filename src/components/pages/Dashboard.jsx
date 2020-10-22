@@ -11,7 +11,7 @@ import {HiOutlineMenu} from "react-icons/hi";
 import '../../styles/navebar.css'
 import Sidebar from '../Sidebar'
 import CreateNote from '../CreateNote'
-// import Backdrop from '../Backdrop'
+import GetNot from '../GetNote'
 class Dashboard extends Component {
     render() {
 
@@ -57,9 +57,10 @@ class Dashboard extends Component {
                         </Button>
                     </div>
                 </Navbar>
-                <Sidebar />
+                <div className='sidebar'>
+                    <Sidebar />
+                </div>
                 <CreateNote/>
-                
             </>
         )
     }

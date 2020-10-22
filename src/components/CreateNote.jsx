@@ -5,9 +5,10 @@ import service from '../services/note'
 import note from '../services/note';
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
+import GetNotes from '../components/GetNote'
+
 toast.configure()
 class CreateNote extends Component {
-
     state = {
         visible: false,
         note: {
@@ -18,10 +19,11 @@ class CreateNote extends Component {
 
     onChangeUser = event => {
         this.setState({[event.target.name]: event.target.value})
+
     }
 
     toggleBox = () => {this.setState({visible: true})}
-    
+
     handleSubmit = (event) => {
         const token = localStorage.getItem('token')
         const note = {
@@ -30,19 +32,18 @@ class CreateNote extends Component {
             token: token
         }
         console.log(note)
-        if(note.title == ""){
-            toast.error('title can not be empty', {position: toast.POSITION.TOP_CENTER});
-        } else{
+        if (note.title == "") {
+        } else {
             service.createNote(note)
-            .then(user => {
-                console.log(user.data.success)
-                if(user.data.success === true){
-                    toast.success('note Created!', {position: toast.POSITION.TOP_CENTER});
-                }
-            })
-            .catch(() => {
-                toast.error('note not Created!', {position: toast.POSITION.TOP_CENTER});
-            });
+                .then(user => {
+                    console.log(user.data.success)
+                    if (user.data.success === true) {
+                        toast.success('note Created!', {position: toast.POSITION.TOP_CENTER});
+                    }
+                })
+                .catch(() => {
+                    toast.error('note not Created!', {position: toast.POSITION.TOP_CENTER});
+                });
         }
         this.setState({description: "", title: ""});
     };
@@ -82,6 +83,9 @@ class CreateNote extends Component {
                             }}>
                             close
                     </button> : null}
+                </div>
+                <div className='contents'>
+                    <GetNotes />
                 </div>
             </>
         )

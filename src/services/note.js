@@ -3,8 +3,12 @@ import axios from 'axios';
 const URL = "http://localhost:4000"
 
 class NoteService {
-    createNote(data) {
-        return axios.post(URL + '/create-note', data)
+    createNote(token) {
+        return axios.post(URL + '/create-note', token)
+    }
+
+    getNote(data) {
+        return axios.post(URL + '/get-note', data)
     }
 }
 

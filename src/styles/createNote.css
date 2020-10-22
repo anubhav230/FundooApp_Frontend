@@ -64,3 +64,14 @@
 .create-note-close:active {
     border: none;
 }
+
+.modal-backdrop {
+    opacity: 0.2 !important;
+}
+
+.note p {
+    font-size: 0.8em;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
