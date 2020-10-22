@@ -2,7 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 // import service from '../services/note'
 import axios from 'axios';
-import note from '../services/note';
+import service from '../services/note';
 import '../styles/getNote.css'
 
 class GetNotes extends Component {
@@ -29,12 +29,12 @@ class GetNotes extends Component {
     // }
 
 
-    async componentDidMount() {
+    componentDidMount() {
         const token = {
             token: localStorage.getItem('token')
         }
         console.log(token)
-        await axios.post('http://localhost:4000/get-note', token)
+        service.getNote(token)
             .then(data => {
                 this.setState({note: data});
                 console.log(this.state.note.data.data[0].title)
@@ -53,7 +53,7 @@ class GetNotes extends Component {
                             {this.state.note.data.data.map((data) => {
                                 return <div>
                                     <div className='note'>
-                                        <h1> {data.title}</h1>
+                                        <h4> {data.title}</h4>
                                         <p>{data.description}</p>
                                     </div>
                                 </div>
