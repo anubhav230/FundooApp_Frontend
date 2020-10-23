@@ -2,12 +2,10 @@ import React from 'react';
 import {Component} from 'react';
 import {VscSymbolColor} from 'react-icons/vsc'
 import {BiBellPlus} from 'react-icons/bi';
-import {RiUserAddFill, RiInboxArchiveLine} from 'react-icons/ri'
+import {RiInboxArchiveLine} from 'react-icons/ri'
 import {BiImageAlt} from 'react-icons/bi'
 import {BsPersonPlus} from 'react-icons/bs'
 import {FiMoreVertical} from 'react-icons/fi'
-import {GrUndo} from 'react-icons/gr'
-import {GrRedo} from 'react-icons/gr'
 
 class CardIcons extends Component {
     render() {

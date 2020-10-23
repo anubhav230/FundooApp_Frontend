@@ -1,6 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
-import '../styles/createNote.css'
+import '../styles/createNote.scss'
 import service from '../services/note'
 import note from '../services/note';
 import {toast} from 'react-toastify'
@@ -8,10 +8,6 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import GetNotes from '../components/GetNote'
 import {GrUndo} from 'react-icons/gr'
 import {GrRedo} from 'react-icons/gr'
-import {VscSymbolColor} from 'react-icons/vsc'
-import {MdAddAlert} from 'react-icons/md';
-import {RiUserAddFill, RiInboxArchiveLine} from 'react-icons/ri'
-import {BiImageAlt} from 'react-icons/bi'
 import Icons from '../components/CardIcon'
 
 toast.configure()

@@ -5,13 +5,11 @@ import logo from '../../Assets/googlekeep.jpg';
 import {IoIosRefresh} from "react-icons/io";
 import {FiSettings} from "react-icons/fi";
 import {BsViewList} from "react-icons/bs";
-import {GrApps} from "react-icons/gr";
 import {CgProfile} from "react-icons/cg";
 import {HiOutlineMenu} from "react-icons/hi";
-import '../../styles/navebar.css'
+import '../../styles/navebar.scss'
 import Sidebar from '../Sidebar'
 import CreateNote from '../CreateNote'
-import GetNot from '../GetNote'
 class Dashboard extends Component {
     render() {
 

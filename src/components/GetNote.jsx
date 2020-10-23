@@ -1,13 +1,12 @@
 import React from 'react';
 import {Component} from 'react';
 import service from '../services/note';
-import '../styles/getNote.css'
+import '../styles/getNote.scss'
 import {VscSymbolColor} from 'react-icons/vsc'
-import {MdAddAlert} from 'react-icons/md';
-import {RiUserAddFill, RiInboxArchiveLine} from 'react-icons/ri'
 import {BiImageAlt} from 'react-icons/bi'
 import {BiBellPlus} from 'react-icons/bi'
 import {BsPersonPlus} from 'react-icons/bs'
+import {FiTrash2} from 'react-icons/fi'
 
 class GetNotes extends Component {
 
@@ -46,7 +45,7 @@ class GetNotes extends Component {
                                             <BsPersonPlus className='iconsCard-get'></BsPersonPlus>
                                             <VscSymbolColor className='iconsCard-get'></VscSymbolColor>
                                             <BiImageAlt className='iconsCard-get'></BiImageAlt>
-                                            <RiInboxArchiveLine className='iconsCard-get'></RiInboxArchiveLine>
+                                            <FiTrash2 className='iconsCard-get'></FiTrash2>
                                         </div>
                                     </div>
                                 </div>
