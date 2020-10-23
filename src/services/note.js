@@ -14,9 +14,7 @@ class NoteService {
     }
 
     deleteNote(nodeData) {
-        let data = nodeData
-        console.log(data)
-        return axios.delete(URL + '/delete-note', nodeData)
+        return axios.post(URL + '/delete-note', nodeData)
     }
 }
 

@@ -11,8 +11,7 @@ import {FiTrash2} from 'react-icons/fi'
 class GetNotes extends Component {
 
     state = {
-        note: null,
-        noteId: ''
+        note: null
     }
 
     componentDidMount() {
@@ -30,10 +29,14 @@ class GetNotes extends Component {
             });
     }
 
-    deleteNote(noteId) {
-        const token = localStorage.getItem('token')
-        noteId['token'] = token
-        // const note = {id: noteId.id}
+    deleteNote(id) {
+        // const token = localStorage.getItem('token')
+       
+        const noteId = {
+            id: id,
+            token: localStorage.getItem('token')
+        }
+        console.log(noteId)
         service.deleteNote(noteId)
     }
 
@@ -55,7 +58,7 @@ class GetNotes extends Component {
                                             <BsPersonPlus className='iconsCard-get'></BsPersonPlus>
                                             <VscSymbolColor className='iconsCard-get'></VscSymbolColor>
                                             <BiImageAlt className='iconsCard-get'></BiImageAlt>
-                                            <FiTrash2 className='iconsCard-get' onClick={() => this.deleteNote({id})}></FiTrash2>
+                                            <FiTrash2 className='iconsCard-get' onClick={() => this.deleteNote(id)}></FiTrash2>
                                         </div>
                                     </div>
                                 </div>
