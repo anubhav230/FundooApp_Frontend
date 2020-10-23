@@ -11,7 +11,8 @@ import {FiTrash2} from 'react-icons/fi'
 class GetNotes extends Component {
 
     state = {
-        note: null
+        note: null,
+        noteId: ''
     }
 
     componentDidMount() {
@@ -29,6 +30,13 @@ class GetNotes extends Component {
             });
     }
 
+    deleteNote(noteId) {
+        const token = localStorage.getItem('token')
+        noteId['token'] = token
+        // const note = {id: noteId.id}
+        service.deleteNote(noteId)
+    }
+
     render() {
         return (
             <>
@@ -36,6 +44,8 @@ class GetNotes extends Component {
                     {this.state.note ? (
                         <div className='noteList2'>
                             {this.state.note.data.data.map((item) => {
+                                const id = item.id
+                                console.log(id)
                                 return <div>
                                     <div className='note'>
                                         <h4> {item.title}</h4>
@@ -45,7 +55,7 @@ class GetNotes extends Component {
                                             <BsPersonPlus className='iconsCard-get'></BsPersonPlus>
                                             <VscSymbolColor className='iconsCard-get'></VscSymbolColor>
                                             <BiImageAlt className='iconsCard-get'></BiImageAlt>
-                                            <FiTrash2 className='iconsCard-get'></FiTrash2>
+                                            <FiTrash2 className='iconsCard-get' onClick={() => this.deleteNote({id})}></FiTrash2>
                                         </div>
                                     </div>
                                 </div>

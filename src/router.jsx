@@ -18,7 +18,6 @@ function Routing() {
                 <Route path="/forgetpassword" component={ForgetPassword} />
                 <Route path="/reset-password" component={ResetPassword} />
                 <Route path="/dashboard" component={Dashboard} />
-                <Route path="/notes" component={CreateNote} />
                 <Route component={Error} />
             </Switch>
         </Router>

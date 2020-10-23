@@ -19,10 +19,10 @@ class Sidebar extends Component {
                     <nav className="side-drawer">
                         <ul className="side-drawer-ul" >
                             <li className="side-drawer-item">
-                                <Link to='/notes' className="side-drawer-link" activeclassname="active">
+                                <div className="side-drawer-link">
                                     <BiBulb className="icons"></BiBulb>
                                     <span className="side-drawer-text">Notes </span>
-                                </Link>
+                                </div>
                             </li>
                             <li>
                                 <Link to='/dashboard/demo' className="side-drawer-link" activeclassname="active">

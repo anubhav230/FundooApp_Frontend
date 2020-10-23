@@ -12,6 +12,12 @@ class NoteService {
         console.log("////" + process.env)
         return axios.post(URL + '/get-note', data)
     }
+
+    deleteNote(nodeData) {
+        let data = nodeData
+        console.log(data)
+        return axios.delete(URL + '/delete-note', nodeData)
+    }
 }
 
 export default new NoteService();
