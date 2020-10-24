@@ -9,7 +9,6 @@ import GetNotes from '../components/GetNote'
 import {GrUndo} from 'react-icons/gr'
 import {GrRedo} from 'react-icons/gr'
 import Icons from '../components/CardIcon'
-
 toast.configure()
 class CreateNote extends Component {
     state = {
@@ -37,7 +36,7 @@ class CreateNote extends Component {
         console.log(note)
         if (note.title == "") {
         } else {
-            service.createNote(note)
+            service.create(note)
                 .then(user => {
                     console.log(user.data.success)
                     if (user.data.success === true) {

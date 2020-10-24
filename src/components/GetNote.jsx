@@ -9,17 +9,15 @@ import {BsPersonPlus} from 'react-icons/bs'
 import {FiTrash2} from 'react-icons/fi'
 
 class GetNotes extends Component {
-
     state = {
         note: null
     }
-
-    componentDidMount() {
+    getUserNote() {
         const token = {
             token: localStorage.getItem('token')
         }
         console.log(token)
-        service.getNote(token)
+        service.get(token)
             .then(data => {
                 this.setState({note: data});
                 console.log(this.state.note.data.data[0].title)
@@ -29,43 +27,52 @@ class GetNotes extends Component {
             });
     }
 
+    componentDidMount() {
+        this.getUserNote()
+    }
+
     deleteNote(id) {
-        // const token = localStorage.getItem('token')
-       
         const noteId = {
             id: id,
             token: localStorage.getItem('token')
         }
         console.log(noteId)
-        service.deleteNote(noteId)
+        service.delete(noteId)
+            .then(() => {
+                this.getUserNote()
+            });
     }
 
+
+
     render() {
+
         return (
             <>
-                <div className='noteList'>
-                    {this.state.note ? (
-                        <div className='noteList2'>
-                            {this.state.note.data.data.map((item) => {
-                                const id = item.id
-                                console.log(id)
-                                return <div>
-                                    <div className='note'>
-                                        <h4> {item.title}</h4>
-                                        <p>{item.description}</p>
-                                        <div className='icons'>
-                                            <BiBellPlus className='iconsCard-get'></BiBellPlus>
-                                            <BsPersonPlus className='iconsCard-get'></BsPersonPlus>
-                                            <VscSymbolColor className='iconsCard-get'></VscSymbolColor>
-                                            <BiImageAlt className='iconsCard-get'></BiImageAlt>
-                                            <FiTrash2 className='iconsCard-get' onClick={() => this.deleteNote(id)}></FiTrash2>
+                    <div className='noteList'>
+                        {this.state.note ? (
+                            <div className='noteList2'>
+                                {this.state.note.data.data.map((item) => {
+                                    const id = item.id
+                                    return <div>
+
+                                        <div className='note'>
+                                            <h4> {item.title}</h4>
+                                            <p>{item.description}</p>
+                                            <div className='icons'>
+                                                <BiBellPlus className='iconsCard-get'></BiBellPlus>
+                                                <BsPersonPlus className='iconsCard-get'></BsPersonPlus>
+                                                <VscSymbolColor className='iconsCard-get'></VscSymbolColor>
+                                                <BiImageAlt className='iconsCard-get'></BiImageAlt>
+                                                <FiTrash2 className='iconsCard-get' onClick={() => this.deleteNote(id)}></FiTrash2>
+                                            </div>
                                         </div>
+
                                     </div>
-                                </div>
-                            })}
-                        </div>)
-                        : null}
-                </div>
+                                })}
+                            </div>)
+                            : null}
+                    </div>
             </>
         )
     }

@@ -1,13 +1,12 @@
 @import './values.scss';
 .custom-nav-bar {
-    /* position: fixed;
-        margin-top: -125px;
-        padding-right: 10px; */
+    position: fixed;
+    margin-top: -100px;
+    padding-right: 10px;
     display: flex;
     background-color: $background-color-white;
     box-shadow: 1px 1px 5px 0.5px rgba(107, 95, 95, 0.733);
-    z-index: 5px;
-    z-index: 300px;
+    z-index: 200px;
 }
 
 .custom-image {
@@ -50,7 +49,6 @@
 .searchBar:active {
     border: none;
     outline: none;
-    /* box-shadow: 1px 1px 5px 0.5px rgba(88, 83, 83, 0.733); */
 }
 
 .btn-sm-refresh {
