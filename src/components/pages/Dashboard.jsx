@@ -27,7 +27,7 @@ class Dashboard extends Component {
                         className="custom-image" />
                     </Navbar.Brand>
                     <span className="custom-brand">
-                        Fundoonotes
+                        FundooNotes
                     </span>
                     <FormControl type="text" placeholder="search" className="searchBar" />
                     <div className='refresh'>

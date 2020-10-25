@@ -55,7 +55,7 @@ class GetNotes extends Component {
             <>
                 <div className='noteList'>
                     {this.state.note ? (
-                        <div className='noteList2'>
+                        <div className='noteList2' >
                             {this.state.note.data.data.map((item) => {
                                 const id = item.id
                                 return <div>

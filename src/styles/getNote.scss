@@ -7,12 +7,14 @@
     display: flex;
     flex-wrap: wrap;
     columns: 4;
+    // width: 200px;
     // column-gap: 5px;
     /* flex-direction: row; */
 }
 
 .note {
-    color: grey;
+    width: 200px;
+    color: rgb(15, 15, 15);
     /* display: inline-block; */
     margin-left: 1px;
     margin-right: 10px;
@@ -24,19 +26,21 @@
     border-radius: 5%;
     padding: 5px;
     padding-left: 10px;
-    padding-top: 0px;
     background-color: transparent;
-    //////
-    // width: 100%;
-    // margin: 0 0 20px;
-    // overflow: hidden;
 }
 
 .note:hover {
+    width: 200px;
+    margin-left: 1px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-style: solid;
+    margin-top: 7px;
+    padding: 5px;
+    padding-left: 10px;
     color: black;
-    /* border: none; */
-    /* border-style: none; */
-    box-shadow: 1px 1px 5px 0.5px rgba(107, 95, 95, 0.733);
+    border: none;
+    box-shadow: 1px 1px 5px 0.5px rgba(71, 69, 69, 0.733);
 }
 
 

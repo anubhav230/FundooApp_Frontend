@@ -1,5 +1,18 @@
 @import './values.scss';
 .title {
+    border: solid;
+    padding-right: 30%;
+    outline: solid;
+    margin-bottom: 6px;
+    margin-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 9px;
+    padding-right: 70%;
+    padding-left: 3%;
+}
+
+.title2 {
+    width: 500px;
     border: none;
     padding-right: 30%;
     outline: none;
@@ -7,8 +20,9 @@
     margin-top: 5px;
     padding-top: 10px;
     padding-bottom: 9px;
-    padding-right: 70%;
+    padding-right: 2%;
     padding-left: 3%;
+    overflow: hidden;
 }
 
 .create-note2 {

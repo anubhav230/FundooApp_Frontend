@@ -58,7 +58,7 @@ class CreateNote extends Component {
                         <input
                             required
                             type='text'
-                            className='title'
+                            className='title2'
                             placeholder='Title'
                             name='title'
                             value={note.title}
@@ -69,7 +69,7 @@ class CreateNote extends Component {
                             <textarea
                                 required
                                 type='text'
-                                className='title'
+                                className='title2'
                                 placeholder='Take a note...'
                                 name='description'
                                 value={note.description}
