@@ -41,6 +41,7 @@ class CreateNote extends Component {
                     console.log(user.data.success)
                     if (user.data.success === true) {
                         toast.success('note Created!', {position: toast.POSITION.TOP_CENTER});
+                        window.location.reload();
                     }
                 })
                 .catch(() => {

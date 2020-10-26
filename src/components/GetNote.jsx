@@ -39,17 +39,14 @@ class GetNotes extends Component {
         this.getUserNote()
     }
 
-    openModal = () => {
-        this.setState((previousState) => {
-            return {showModal: !previousState.showModal};
-        });
-    }
+
     closeModal = () => {
         this.setState({showModal: false});
     }
 
 
     deleteNote(id) {
+        this.setState({showModal: false});
         const noteId = {
             id: id,
             token: localStorage.getItem('token')
@@ -61,21 +58,16 @@ class GetNotes extends Component {
             });
     }
 
-
-
     render() {
-        let addModelClose = () => this.setState({smShow: false})
         return (
             <>
                 <div className='noteList'>
                     {this.state.note ? (
                         <div className='noteList2' >
-                            {this.state.note.data.data.map((item) => {
+                            {this.state.note.data.data.filter((data) => !data.isDelete).map((item) => {
                                 const id = item.id
                                 const title = item.title
                                 const description = item.description
-                                // console.log(item.title)
-                                // console.log(item.description)
                                 return <div>
                                     <div className='note' onClick={() => this.setState({
                                         showModal: true,
@@ -84,7 +76,7 @@ class GetNotes extends Component {
                                         description: item.description
                                     })}>
 
-                                        <h4> {item.title}</h4>
+                                        <span> {item.title}</span>
                                         <p>{item.description}</p>
                                         <div className='icons'>
                                             <BiBellPlus className='iconsCard-get'></BiBellPlus>
