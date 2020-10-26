@@ -81,8 +81,7 @@ class GetNotes extends Component {
                                         showModal: true,
                                         id: item.id,
                                         title: item.title,
-                                        description:
-                                            item.description
+                                        description: item.description
                                     })}>
 
                                         <h4> {item.title}</h4>
@@ -94,18 +93,12 @@ class GetNotes extends Component {
                                             <BiImageAlt className='iconsCard-get'></BiImageAlt>
                                             <FiTrash2 className='iconsCard-get' onClick={() => this.deleteNote(id)}></FiTrash2>
                                             <BiEdit className='iconsCard-get' onClick={() => this.setState({showModal: true})}></BiEdit>
-
                                         </div>
-
                                     </div>
-
                                 </div>
                             })}
-
                         </div>)
-
                         : null}
-
                 </div>
                 <div>
                     <UpdateModel

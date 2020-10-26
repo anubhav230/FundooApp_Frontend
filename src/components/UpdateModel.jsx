@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {Modal, Button} from 'react-bootstrap'
 import '../styles/updateModel.scss'
 import service from '../services/note'
-import getNote from './GetNote'
+import Icons from './CardIcon'
+import '../styles/getNote.scss'
 
 export class UpdateModel extends Component {
     constructor(props) {
@@ -13,14 +14,17 @@ export class UpdateModel extends Component {
             title: '',
             description: ''
         }
-        this.handleSave = this.handleSave.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
+    update(nextProps) {
         this.setState({
             title: nextProps.title,
             description: nextProps.description,
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.update(nextProps)
     }
 
     titleHandler(e) {
@@ -31,13 +35,13 @@ export class UpdateModel extends Component {
         this.setState({description: e.target.value});
     }
 
-    handleSave() {
-
+    handleSave = () => {
         var updateNote = {id: this.props.id, title: this.state.title, description: this.state.description, token: localStorage.getItem('token')};
         console.log(updateNote)
         service.update(updateNote)
             .then(() => {
-                // window.location.reload();
+                this.setState(this.props.close);
+                window.location.reload();
             });
     }
 
@@ -46,7 +50,6 @@ export class UpdateModel extends Component {
             <>
                 <Modal
                     show={this.props.show}
-                    // {...this.props}
                     className="model-lg"
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
@@ -60,18 +63,16 @@ export class UpdateModel extends Component {
                             value={this.state.title}
                             onChange={(e) => this.titleHandler(e)}
                         />
-                        <textarea className='title'
+                        <textarea className='description'
                             value={this.state.description}
                             onChange={(e) => this.descriptionHandler(e)}
                         />
-
-                        <Button className='model-close' onClick={this.props.close}>Close</Button>
-                        <Button className='model-close' type="submit" onClick={this.props.close, this.handleSave}>
-                            Save
-                        </Button>
+                            <Button className='model-close' onClick={this.props.close}>Close</Button>
+                            <Button className='model-close' type="submit" onClick={this.handleSave}>
+                                Save
+                            </Button>
                     </Modal.Body>
                     <Modal.Footer>
-
                     </Modal.Footer>
                 </Modal>
             </>
