@@ -1,8 +1,9 @@
+
 import React from 'react';
 import {Component} from 'react';
 import service from '../services/note';
 import '../styles/getNote.scss'
-import '../styles/updateModel.scss'
+// import '../styles/updateModel.scss'
 import {VscSymbolColor} from 'react-icons/vsc'
 import {BiImageAlt} from 'react-icons/bi'
 import {BiBellPlus} from 'react-icons/bi'
@@ -14,7 +15,10 @@ import {BiEdit} from 'react-icons/bi'
 class GetNotes extends Component {
     state = {
         note: null,
-        smShow: false
+        showModal: false,
+        id: null,
+        title: '',
+        description: '',
     }
     getUserNote() {
         const token = {
@@ -34,6 +38,16 @@ class GetNotes extends Component {
     componentDidMount() {
         this.getUserNote()
     }
+
+    openModal = () => {
+        this.setState((previousState) => {
+            return {showModal: !previousState.showModal};
+        });
+    }
+    closeModal = () => {
+        this.setState({showModal: false});
+    }
+
 
     deleteNote(id) {
         const noteId = {
@@ -58,8 +72,19 @@ class GetNotes extends Component {
                         <div className='noteList2' >
                             {this.state.note.data.data.map((item) => {
                                 const id = item.id
+                                const title = item.title
+                                const description = item.description
+                                // console.log(item.title)
+                                // console.log(item.description)
                                 return <div>
-                                    <div className='note'>
+                                    <div className='note' onClick={() => this.setState({
+                                        showModal: true,
+                                        id: item.id,
+                                        title: item.title,
+                                        description:
+                                            item.description
+                                    })}>
+
                                         <h4> {item.title}</h4>
                                         <p>{item.description}</p>
                                         <div className='icons'>
@@ -68,8 +93,10 @@ class GetNotes extends Component {
                                             <VscSymbolColor className='iconsCard-get'></VscSymbolColor>
                                             <BiImageAlt className='iconsCard-get'></BiImageAlt>
                                             <FiTrash2 className='iconsCard-get' onClick={() => this.deleteNote(id)}></FiTrash2>
-                                            <BiEdit className='iconsCard-get' onClick={() => this.setState({smShow: true})}></BiEdit>
+                                            <BiEdit className='iconsCard-get' onClick={() => this.setState({showModal: true})}></BiEdit>
+
                                         </div>
+
                                     </div>
 
                                 </div>
@@ -80,16 +107,18 @@ class GetNotes extends Component {
                         : null}
 
                 </div>
-                <UpdateModel
-                    show={this.state.smShow}
-                    onHide={addModelClose}
-                    className="uptateModel"
-                />
+                <div>
+                    <UpdateModel
+                        id={this.state.id}
+                        title={this.state.title}
+                        description={this.state.description}
+                        show={this.state.showModal}
+                        close={this.closeModal}
+                        className="uptateModel"
+                    />
+                </div>
             </>
-
         )
     }
-
 }
-
 export default GetNotes;

@@ -9,6 +9,7 @@ import ResetPassword from './components/pages/ResetPassword'
 import Dashboard from './components/pages/Dashboard'
 import CreateNote from './components/CreateNote'
 
+
 function Routing() {
     return (
         <Router>
@@ -18,6 +19,7 @@ function Routing() {
                 <Route path="/forgetpassword" component={ForgetPassword} />
                 <Route path="/reset-password" component={ResetPassword} />
                 <Route path="/dashboard" component={Dashboard} />
+                <Route path="/dashboard/demo" component={CreateNote} />
                 <Route component={Error} />
             </Switch>
         </Router>

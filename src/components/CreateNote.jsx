@@ -94,7 +94,7 @@ class CreateNote extends Component {
 
                 </div>
                 <div className='contents'>
-                    <GetNotes />
+                    {/* <GetNotes /> */}
                 </div>
             </>
         )

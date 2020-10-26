@@ -9,12 +9,15 @@ class NoteService {
     }
 
     get(data) {
-        console.log("////" + process.env)
         return axios.post(URL + '/get-note', data)
     }
 
-    delete(nodeData) {
-        return axios.post(URL + '/delete-note', nodeData)
+    delete(noteData) {
+        return axios.post(URL + '/delete-note', noteData)
+    }
+
+    update(noteData) {
+        return axios.put(URL + '/update-note', noteData)
     }
 }
 

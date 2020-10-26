@@ -10,6 +10,7 @@ import {HiOutlineMenu} from "react-icons/hi";
 import '../../styles/navebar.scss'
 import Sidebar from '../Sidebar'
 import CreateNote from '../CreateNote'
+import GetNote from '../GetNote'
 class Dashboard extends Component {
     render() {
 
@@ -59,6 +60,7 @@ class Dashboard extends Component {
                     <Sidebar />
                 </div>
                 <CreateNote/>
+                <GetNote />
             </>
         )
     }
